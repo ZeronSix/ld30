@@ -23,7 +23,7 @@ public class Generator : MonoBehaviour {
 		return planets[Random.Range(0, planets.Count)];
 	}
 
-	Vector3 CirclePosition(float radius, Vector3 center, float angle = Random.value * 360) {
+	Vector3 CirclePosition(float radius, Vector3 center, float angle) {
 		Vector3 position = Vector3.zero;
 		position.x = center.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
 		position.y = center.y + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
@@ -40,7 +40,7 @@ public class Generator : MonoBehaviour {
 		for (int i = 0; i < bodies; i++) {
 			GameObject newBody = null;
 			if (i != 0) {
-				newBody = (GameObject)Instantiate(GetRandomPlanet(), CirclePosition((i * distance) + distance, rootPosition), Quaternion.identity);
+				newBody = (GameObject)Instantiate(GetRandomPlanet(), CirclePosition((i * distance) + distance, rootPosition, Random.value * 360), Quaternion.identity);
 
 				newBody.name = "Planet " + i.ToString();
 				newBody.transform.parent = newSystem[0].transform;
