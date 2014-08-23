@@ -151,7 +151,7 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 80
-  orthographic: 1
+  orthographic: 0
   orthographic size: 9.5
   m_Depth: -1
   m_CullingMask:
@@ -233,7 +233,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: field of view
@@ -276,7 +276,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sunPrefab: {fileID: 100000, guid: 617835c2b73a3b34c8adaf57d780db34, type: 2}
-  planetPrefab: {fileID: 100000, guid: 5c36f73821ff70e4eae8f2fac77db906, type: 2}
+  orbitPrefab: {fileID: 100000, guid: 6fc2ef34ea4c2a54ca4d52f0aeba553d, type: 2}
+  planets:
+  - {fileID: 100000, guid: 17a718183875a8b488bb2d00cd107bf5, type: 2}
+  - {fileID: 100000, guid: 242848dab2b621042befabe86cdba5a2, type: 2}
+  - {fileID: 100000, guid: d662e4f496d521b4e8901f5997534655, type: 2}
   minDistance: 1.70000005
   maxDistance: 2.5
   minBodySize: .600000024

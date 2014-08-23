@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class Generator : MonoBehaviour {
 
 	public GameObject sunPrefab;
-	public GameObject planetPrefab;
+	public GameObject orbitPrefab;
+	public List<GameObject> planets = new List<GameObject> ();
 
 	public List<List<GameObject>> systems = new List<List<GameObject>>();
 
@@ -18,8 +19,11 @@ public class Generator : MonoBehaviour {
 	public int minBodies = 3;
 	public int maxBodies = 5;
 
-	Vector3 RandomCirclePosition(float radius, Vector3 center) {
-		float angle = Random.value * 360;
+	GameObject GetRandomPlanet() {
+		return planets[Random.Range(0, planets.Count)];
+	}
+
+	Vector3 CirclePosition(float radius, Vector3 center, float angle = Random.value * 360) {
 		Vector3 position = Vector3.zero;
 		position.x = center.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
 		position.y = center.y + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
@@ -36,13 +40,20 @@ public class Generator : MonoBehaviour {
 		for (int i = 0; i < bodies; i++) {
 			GameObject newBody = null;
 			if (i != 0) {
-				newBody = (GameObject)Instantiate(planetPrefab, RandomCirclePosition((i * distance) + distance, rootPosition), Quaternion.identity);
+				newBody = (GameObject)Instantiate(GetRandomPlanet(), CirclePosition((i * distance) + distance, rootPosition), Quaternion.identity);
 
 				newBody.name = "Planet " + i.ToString();
 				newBody.transform.parent = newSystem[0].transform;
 				newBody.GetComponent<Planet>().realScale = Random.Range(minBodySize, maxBodySize);
 				newBody.transform.localScale = Vector3.zero;
-				//newBody.SetActive(false);
+
+				GameObject orbit = (GameObject)Instantiate(orbitPrefab);
+				orbit.transform.parent = null;
+				orbit.transform.position = rootPosition;
+				orbit.transform.localScale = Vector3.one * ((i * distance) + distance) * 0.21f;
+
+				newBody.GetComponent<Planet>().orbit = orbit;
+				newBody.GetComponent<Planet>().orbitScale = Vector3.one * ((i * distance) + distance) * 0.21f;
 			}
 			else {
 				newBody = (GameObject)Instantiate(sunPrefab, rootPosition, Quaternion.identity);
@@ -61,6 +72,8 @@ public class Generator : MonoBehaviour {
 		GenerateSystem (Vector3.zero);
 		GenerateSystem (new Vector3(8f, 0f, 0f));
 		GenerateSystem (new Vector3(4f, 5f, 0f));
+		GenerateSystem (new Vector3(-4f, 5f, 0f));
+		GenerateSystem (new Vector3(4f, -5f, 0f));
 	}
 
 	void Update () {

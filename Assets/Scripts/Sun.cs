@@ -22,12 +22,27 @@ public class Sun : MonoBehaviour {
 
 	void Update () {
 		foreach (Transform planet in transform) {
-			Debug.Log(planet.name);
+			Planet planetComponent = planet.GetComponent<Planet>();
+			//TODO: Slava, fix it plz
 			if (gameController.gameState == GameController.GameState.SYSTEM_VIEW && gameController.selectedSystem == this) {
-				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.one * planet.GetComponent<Planet>().realScale, 10f * Time.deltaTime);
+				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.one * planetComponent.realScale, 10f * Time.deltaTime);
+
+
+
+				planetComponent.orbit.transform.localScale = 
+					Vector3.Lerp(planetComponent.orbit.transform.localScale, planetComponent.orbitScale, 10f * Time.deltaTime);
 			}
-			else {
+			else if (gameController.selectedSystem != this && gameController.gameState == GameController.GameState.SYSTEM_VIEW) {
 				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
+
+				planetComponent.orbit.transform.localScale = 
+					Vector3.Lerp(planetComponent.orbit.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
+			}
+			else if (gameController.gameState != GameController.GameState.SYSTEM_VIEW) {
+				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
+
+				planetComponent.orbit.transform.localScale = 
+					Vector3.Lerp(planetComponent.orbit.transform.localScale, planetComponent.orbitScale * 0.3f, 10f * Time.deltaTime);
 			}
 		}	
 
