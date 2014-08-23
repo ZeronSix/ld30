@@ -12,8 +12,8 @@ public class Generator : MonoBehaviour {
 	public float minDistance = 2f;
 	public float maxDistance = 3f;
 
-	public float minBodySize = 0.8f;
-	public float maxBodySize = 1.1f;
+	public float minBodySize = 0.6f;
+	public float maxBodySize = 0.75f;
 
 	public int minBodies = 3;
 	public int maxBodies = 5;
@@ -36,7 +36,7 @@ public class Generator : MonoBehaviour {
 		for (int i = 0; i < bodies; i++) {
 			GameObject newBody = null;
 			if (i != 0) {
-				newBody = (GameObject)Instantiate(planetPrefab, RandomCirclePosition(i * distance, rootPosition), Quaternion.identity);
+				newBody = (GameObject)Instantiate(planetPrefab, RandomCirclePosition((i * distance) + distance, rootPosition), Quaternion.identity);
 
 				newBody.name = "Planet " + i.ToString();
 				newBody.transform.parent = newSystem[0].transform;
@@ -48,6 +48,7 @@ public class Generator : MonoBehaviour {
 				newBody = (GameObject)Instantiate(sunPrefab, rootPosition, Quaternion.identity);
 
 				newBody.name = "Sun " + (systems.Count+1).ToString();
+				newBody.transform.localScale = Vector3.one * 2f;
 			}
 
 			newSystem.Add (newBody);
@@ -65,7 +66,7 @@ public class Generator : MonoBehaviour {
 	void Update () {
 		foreach (List<GameObject> system in systems) {
 			for (int i = 1; i < system.Count; i++) {
-				system[i].transform.RotateAround (system[0].transform.position, Vector3.forward, i * 0.5f * 25 * Time.deltaTime);
+				system[i].transform.RotateAround (system[0].transform.position, Vector3.forward, i * 0.4f * 25 * Time.deltaTime);
 				Debug.DrawLine(system[i].transform.position, system[0].transform.position);
 			}
 		}

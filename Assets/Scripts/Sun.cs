@@ -7,6 +7,8 @@ public class Sun : MonoBehaviour {
 
 	void Start () {
 		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController> ();
+
+
 	}
 
 	void OnMouseDown() {
@@ -19,10 +21,10 @@ public class Sun : MonoBehaviour {
 		foreach (Transform planet in transform) {
 			Debug.Log(planet.name);
 			if (gameController.gameState == GameController.GameState.SYSTEM_VIEW && gameController.selectedSystem == this) {
-				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.one * planet.GetComponent<Planet>().realScale, 15f * Time.deltaTime);
+				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.one * planet.GetComponent<Planet>().realScale, 10f * Time.deltaTime);
 			}
 			else {
-				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.zero, 15f * Time.deltaTime);
+				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
 			}
 		}	
 
@@ -33,5 +35,7 @@ public class Sun : MonoBehaviour {
 			//transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, 15f * Time.deltaTime);	
 			renderer.enabled = true;
 		}
+
+		transform.RotateAround (transform.position, Vector3.forward, 9 * Time.deltaTime);
 	}
 }

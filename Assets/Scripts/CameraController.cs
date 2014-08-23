@@ -25,9 +25,9 @@ public class CameraController : MonoBehaviour
         transform.Translate(-input * Speed * Time.deltaTime, Space.Self);
     }
 
-	public void ZoomIn(Vector3 point, float distance = -10f)
+	public void ZoomIn(Vector3 point, float distance = -13f)
 	{
-		transform.position = Vector3.Lerp (transform.position, new Vector3(point.x, point.y, distance), Speed * Time.deltaTime);
+		transform.position = Vector3.Lerp (transform.position, new Vector3(point.x, point.y, distance), Speed * Time.deltaTime * 0.5f);
 	}
 
 	public void ZoomOut()

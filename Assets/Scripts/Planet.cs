@@ -10,8 +10,8 @@ public class Planet : MonoBehaviour {
 	void Start () {
 		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController> ();
 	}
-
+	
 	void Update () {
-
+		transform.RotateAround (transform.position, Vector3.forward, 9 * Time.deltaTime);
 	}
 }
