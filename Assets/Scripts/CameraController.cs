@@ -15,6 +15,6 @@ public class CameraController : MonoBehaviour
 
     private void UpdateMovement(Vector2 input)
     {
-        transform.Translate(input * Speed, Space.Self);
+        transform.Translate(-input * Speed * Time.deltaTime, Space.Self);
     }
 }
