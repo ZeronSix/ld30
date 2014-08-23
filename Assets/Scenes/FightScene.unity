@@ -198,7 +198,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a1bfb1fadc278404180a24736a00de6b, type: 2}
+  - {fileID: 2100000, guid: fb0489a6e85a42948baafef231de13bd, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CenterSpawnOffset: 1
   VerticalSpawnDistance: .5
+  TimeBeforeExit: 2
   Unit1Prefab: {fileID: 1913013680}
   Unit2Prefab: {fileID: 537003463}
   AttackingSide: 1
@@ -370,7 +371,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a1bfb1fadc278404180a24736a00de6b, type: 2}
+  - {fileID: 2100000, guid: fb0489a6e85a42948baafef231de13bd, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

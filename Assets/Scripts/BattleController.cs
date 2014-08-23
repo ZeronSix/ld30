@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BattleController : MonoBehaviour
 {
     public float CenterSpawnOffset;
     public float VerticalSpawnDistance;
+    public float TimeBeforeExit = 2.0f;
 
     public GameObject Unit1Prefab;
     public GameObject Unit2Prefab;
@@ -14,6 +17,7 @@ public class BattleController : MonoBehaviour
 
     private Unit Unit1;
     private Unit Unit2;
+    private readonly List<GameObject> ships = new List<GameObject>(); 
 
     void Awake()
     {
@@ -24,6 +28,7 @@ public class BattleController : MonoBehaviour
 
         SpawnUnit(Unit1);
         SpawnUnit(Unit2);
+        StartCoroutine(ExitCoroutine());
     }
 
     private void SpawnUnit(Unit unit)
@@ -34,6 +39,7 @@ public class BattleController : MonoBehaviour
         for (int i = 0; i < unit.MaxShipCount; i++)
         {
             var ship = Instantiate(unit.BattleObject, new Vector3(spawnX, spawnY, 0), unit.BattleObject.transform.rotation) as GameObject;
+            ships.Add(ship);
             var battleShipComp = ship.GetComponent<BattleShip>();
             battleShipComp.Unit = unit;
             if (AttackingSide == unit.BattleSide)
@@ -63,13 +69,27 @@ public class BattleController : MonoBehaviour
         return specialDamageMult;
     }
 
+    private void Exit()
+    {
+        foreach (var ship in ships)
+        {
+            Destroy(ship);
+        }
+        Destroy(gameObject);
+    }
+
     public void StartAttack(BattleSide side)
     {
         var unit = side == BattleSide.Humans ? Unit1 : Unit2;
         var enemyUnit = side == BattleSide.Humans ? Unit2 : Unit1;
 
-        
         enemyUnit.TakeDamage(unit.BaseDamage*CalculateSpecialDamageMults(unit, enemyUnit));
         unit.TakeDamage(enemyUnit.BaseDamage * CalculateSpecialDamageMults(enemyUnit, unit) * enemyUnit.DamageMultiplier.Defense);
+    }
+
+    private IEnumerator ExitCoroutine()
+    {
+        yield return new WaitForSeconds(TimeBeforeExit);
+        Exit();
     }
 }
