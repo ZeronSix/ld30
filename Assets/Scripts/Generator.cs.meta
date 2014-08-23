@@ -1,0 +1,9 @@
+fileFormatVersion: 2
+guid: ff77f3be2d21e2144b2954a0f1710839
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - planetPrefab: {fileID: 100000, guid: 5c36f73821ff70e4eae8f2fac77db906, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
