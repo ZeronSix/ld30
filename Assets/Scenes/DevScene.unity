@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd9124d69c745a4baf69d8ad1e91584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 15
 --- !u!81 &69029444
 AudioListener:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 280085440}
   m_GameObject: {fileID: 69029442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.70040011, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -189,11 +189,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.70040011
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -229,7 +229,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: Speed
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
+      propertyPath: orthographic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
@@ -263,11 +267,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff77f3be2d21e2144b2954a0f1710839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sunPrefab: {fileID: 100000, guid: 617835c2b73a3b34c8adaf57d780db34, type: 2}
   planetPrefab: {fileID: 100000, guid: 5c36f73821ff70e4eae8f2fac77db906, type: 2}
   minDistance: 2
   maxDistance: 2
   minBodySize: .800000012
   maxBodySize: 1.10000002
+  minBodies: 3
+  maxBodies: 5
 --- !u!4 &422468545
 Transform:
   m_ObjectHideFlags: 0
@@ -280,3 +287,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &689683289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 689683291}
+  - 114: {fileID: 689683290}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!114 &689683290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 689683289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7eb27f6c439634ea3b23fedbeb37c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: 0
+  selectedSystem: {fileID: 0}
+--- !u!4 &689683291
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 689683289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2

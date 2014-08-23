@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Generator : MonoBehaviour {
 
+	public GameObject sunPrefab;
 	public GameObject planetPrefab;
 
 	public List<List<GameObject>> systems = new List<List<GameObject>>();
@@ -13,6 +14,9 @@ public class Generator : MonoBehaviour {
 
 	public float minBodySize = 0.8f;
 	public float maxBodySize = 1.1f;
+
+	public int minBodies = 3;
+	public int maxBodies = 5;
 
 	Vector3 RandomCirclePosition(float radius, Vector3 center) {
 		float angle = Random.value * 360;
@@ -26,33 +30,43 @@ public class Generator : MonoBehaviour {
 	void GenerateSystem(Vector3 rootPosition) {
 		List<GameObject> newSystem = new List<GameObject> ();
 
-		int bodies = Random.Range (3, 6);
+		int bodies = Random.Range (Mathf.Max(3, minBodies), maxBodies);
 		float distance = Random.Range (minDistance, maxDistance);
 
 		for (int i = 0; i < bodies; i++) {
-			GameObject newBody = (GameObject)Instantiate(planetPrefab, RandomCirclePosition(i * distance, Vector3.zero), Quaternion.identity);
+			GameObject newBody = null;
 			if (i != 0) {
+				newBody = (GameObject)Instantiate(planetPrefab, RandomCirclePosition(i * distance, rootPosition), Quaternion.identity);
+
+				newBody.name = "Planet " + i.ToString();
 				newBody.transform.parent = newSystem[0].transform;
-				newBody.transform.localScale *= Random.Range(minBodySize, maxBodySize);
+				newBody.GetComponent<Planet>().realScale = Random.Range(minBodySize, maxBodySize);
+				newBody.transform.localScale = Vector3.zero;
+				//newBody.SetActive(false);
+			}
+			else {
+				newBody = (GameObject)Instantiate(sunPrefab, rootPosition, Quaternion.identity);
+
+				newBody.name = "Sun " + (systems.Count+1).ToString();
 			}
 
 			newSystem.Add (newBody);
 		}
-
-		newSystem [0].transform.position = rootPosition;
 
 		systems.Add (newSystem);
 	}
 	
 	void Start () {
 		GenerateSystem (Vector3.zero);
-		GenerateSystem (new Vector3(15f, 0f, 0f));
+		GenerateSystem (new Vector3(8f, 0f, 0f));
+		GenerateSystem (new Vector3(4f, 5f, 0f));
 	}
 
 	void Update () {
 		foreach (List<GameObject> system in systems) {
 			for (int i = 1; i < system.Count; i++) {
-				system[i].transform.RotateAround (system[0].transform.position, Vector3.forward, 25 * Time.deltaTime);
+				system[i].transform.RotateAround (system[0].transform.position, Vector3.forward, i * 0.5f * 25 * Time.deltaTime);
+				Debug.DrawLine(system[i].transform.position, system[0].transform.position);
 			}
 		}
 	}

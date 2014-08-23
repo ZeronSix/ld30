@@ -3,6 +3,7 @@ guid: ff77f3be2d21e2144b2954a0f1710839
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - sunPrefab: {fileID: 100000, guid: 617835c2b73a3b34c8adaf57d780db34, type: 2}
   - planetPrefab: {fileID: 100000, guid: 5c36f73821ff70e4eae8f2fac77db906, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
