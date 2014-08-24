@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Planet : MonoBehaviour {
 
-	private GameController gameController;
+	//private GameController gameController;
 
 	public GameObject orbit;
 	public Vector3 orbitScale;
@@ -14,7 +14,7 @@ public class Planet : MonoBehaviour {
 	public float realScale = 1f;
 	
 	void Start () {
-		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController> ();
+		//gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController> ();
 	}
 	
 	void Update () {

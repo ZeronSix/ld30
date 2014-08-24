@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Generator : MonoBehaviour {
+public class GalacticGenerator : MonoBehaviour {
 
 	public GameObject sunPrefab;
 	public GameObject orbitPrefab;
@@ -48,12 +48,13 @@ public class Generator : MonoBehaviour {
 				newBody.transform.localScale = Vector3.zero;
 
 				GameObject orbit = (GameObject)Instantiate(orbitPrefab);
-				orbit.transform.parent = null;
+				orbit.transform.parent = GameObject.FindWithTag("Orbits").transform;
 				orbit.transform.position = rootPosition;
-				orbit.transform.localScale = Vector3.one * ((i * distance) + distance) * 0.21f;
 
 				newBody.GetComponent<Planet>().orbit = orbit;
 				newBody.GetComponent<Planet>().orbitScale = Vector3.one * ((i * distance) + distance) * 0.21f;
+
+				orbit.transform.localScale = newBody.GetComponent<Planet>().orbitScale * 0.5f;
 			}
 			else {
 				newBody = (GameObject)Instantiate(sunPrefab, rootPosition, Quaternion.identity);
@@ -70,10 +71,10 @@ public class Generator : MonoBehaviour {
 	
 	void Start () {
 		GenerateSystem (Vector3.zero);
-		GenerateSystem (new Vector3(8f, 0f, 0f));
-		GenerateSystem (new Vector3(4f, 5f, 0f));
-		GenerateSystem (new Vector3(-4f, 5f, 0f));
-		GenerateSystem (new Vector3(4f, -5f, 0f));
+		GenerateSystem (new Vector3(10f, 0f, 0f));
+		GenerateSystem (new Vector3(5f, 9f, 0f));
+		GenerateSystem (new Vector3(-9f, 5f, 0f));
+		GenerateSystem (new Vector3(4f, -9f, 0f));
 	}
 
 	void Update () {

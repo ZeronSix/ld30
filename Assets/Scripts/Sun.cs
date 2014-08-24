@@ -27,7 +27,7 @@ public class Sun : MonoBehaviour {
 			if (gameController.gameState == GameController.GameState.SYSTEM_VIEW && gameController.selectedSystem == this) {
 				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.one * planetComponent.realScale, 10f * Time.deltaTime);
 
-
+				planet.renderer.enabled = true;
 
 				planetComponent.orbit.transform.localScale = 
 					Vector3.Lerp(planetComponent.orbit.transform.localScale, planetComponent.orbitScale, 10f * Time.deltaTime);
@@ -41,8 +41,10 @@ public class Sun : MonoBehaviour {
 			else if (gameController.gameState != GameController.GameState.SYSTEM_VIEW) {
 				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
 
+				planet.renderer.enabled = false;
+
 				planetComponent.orbit.transform.localScale = 
-					Vector3.Lerp(planetComponent.orbit.transform.localScale, planetComponent.orbitScale * 0.3f, 10f * Time.deltaTime);
+					Vector3.Lerp(planetComponent.orbit.transform.localScale, planetComponent.orbitScale * 0.5f, 10f * Time.deltaTime);
 			}
 		}	
 
