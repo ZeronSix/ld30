@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour {
 	public GameState gameState = GameState.GALACTIC_VIEW;
 
 	public Sun selectedSystem;
+
+    public Unit SelectedUnit;
 	
 	void Start () {
 
@@ -28,4 +30,9 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape) && gameState == GameController.GameState.SYSTEM_VIEW) UnselectSystem();
 	}
+
+    public static GameController Get()
+    {
+        return GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+    }
 }

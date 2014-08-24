@@ -12,9 +12,12 @@ public class Planet : MonoBehaviour {
 	public Vector3 orbitScale;
 
 	public float realScale = 1f;
-	
-	void Start () {
-		//gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController> ();
+
+    private GameController gc;
+
+	void Start ()
+	{
+	    gc = GameController.Get();
 	}
 	
 	void Update () {
@@ -22,4 +25,13 @@ public class Planet : MonoBehaviour {
 
 		orbit.transform.RotateAround (orbit.transform.position, Vector3.forward, orbitScale.x * 3 * Time.deltaTime);
 	}
+
+    void OnMouseOver()
+    {
+        if (Input.GetButtonDown("Action"))
+        {
+            if (gc.SelectedUnit)
+                gc.SelectedUnit.Target = transform;
+        }
+    }
 }
