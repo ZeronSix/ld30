@@ -18,7 +18,7 @@ public class Rocket : MonoBehaviour {
 		Quaternion rotation = Quaternion.LookRotation(relativePos);
 		transform.rotation = rotation;
 
-		transform.position = Vector3.Lerp (transform.position, path[currentPoint], 5f * Time.deltaTime);
+		transform.position = Vector3.Lerp (transform.position, path[currentPoint], 2f * Time.deltaTime);
 		if (Vector3.Distance (transform.position, path [currentPoint]) < nextPointTreshold) {
 			if (currentPoint < path.Count-1) currentPoint++;
 			else {
