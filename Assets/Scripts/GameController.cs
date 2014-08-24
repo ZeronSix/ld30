@@ -12,9 +12,13 @@ public class GameController : MonoBehaviour {
 	public Sun selectedSystem;
 
     public Unit SelectedUnit;
-	
-	void Start () {
+    public float UnitMoveSpeed;
 
+    private Grid _grid;
+	
+	void Start ()
+	{
+	    _grid = Grid.Get();
 	}
 
 	public void SelectSystem(Sun sun) {
@@ -27,7 +31,8 @@ public class GameController : MonoBehaviour {
 		selectedSystem = null;
 	}
 
-	void Update () {
+	void Update () 
+    {
 		if (Input.GetKeyDown(KeyCode.Escape) && gameState == GameController.GameState.SYSTEM_VIEW) UnselectSystem();
 	}
 
