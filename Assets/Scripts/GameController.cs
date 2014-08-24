@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
 
     public Unit SelectedUnit;
     public float UnitMoveSpeed;
+    public float AttackDuration;
+    public bool Busy = false;
 
     private Grid _grid;
 	

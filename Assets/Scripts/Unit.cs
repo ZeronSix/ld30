@@ -29,6 +29,7 @@ public class Unit : MonoBehaviour
     public UnitType   Type;
     public float      BaseDamage;
     public float      OrbitDistance;
+    public bool       Busy = false;
 
     public DamageMultiplier DamageMultiplier;
     public Transform Target;
@@ -38,6 +39,7 @@ public class Unit : MonoBehaviour
     private Grid _grid;
     private GameObject _bBox;
     private List<Vector2> pathNodes = null;
+    private bool _attacking = false;
 
     void Awake()
     {
@@ -57,6 +59,8 @@ public class Unit : MonoBehaviour
             if (pathNodes.Count == 0)
             {
                 pathNodes = null;
+                if (!_attacking)
+                    _gc.Busy = false;
                 return;
             }
 
@@ -66,7 +70,7 @@ public class Unit : MonoBehaviour
 
             if ((transform.position - new Vector3(pathNodes[0].x, pathNodes[0].y)).magnitude < 0.01f)
             {
-                //transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
+                transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
 
                 pathNodes.RemoveAt(0);
             }
@@ -80,16 +84,68 @@ public class Unit : MonoBehaviour
     {
         Health -= damage;
         if (Health < 0)
+        {
             Health = 0;
+            Die();
+        }
     }
 
     public void MoveTo(List<Vector2> positions)
     {
         pathNodes = positions;
+        _gc.Busy = true;
+        Busy = true;
     }
 
     public void EnableBoundingBox()
     {
         _bBox.SetActive(true);
+    }
+
+    private static float CalculateSpecialDamageMults(Unit unit, Unit enemy)
+    {
+        var specialDamageMult = 1.0f;
+        switch (enemy.Type) {
+            case UnitType.Assault:
+                specialDamageMult = unit.DamageMultiplier.DamageAgainstAssaults;
+                break;
+            case UnitType.Cruiser:
+                specialDamageMult = unit.DamageMultiplier.DamageAgainstCruisers;
+                break;
+            case UnitType.Fighter:
+                specialDamageMult = unit.DamageMultiplier.DamageAgainstFighters;
+                break;
+        }
+        return specialDamageMult;
+    }
+
+    public void Attack(Unit enemy)
+    {
+        enemy.TakeDamage(this.BaseDamage * CalculateSpecialDamageMults(this, enemy));
+        this.TakeDamage(enemy.BaseDamage * CalculateSpecialDamageMults(enemy, this) * enemy.DamageMultiplier.Defense);
+        _gc.Busy = true;
+        Busy = true;
+
+        PlayAttackAnimation(enemy);
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public void PlayAttackAnimation(Unit enemy)
+    {
+        // TODO: weapons
+        Invoke("StopAttack", _gc.AttackDuration);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(enemy.transform.position.y - transform.position.y, enemy.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90));
+        _attacking = true;
+        _gc.Busy = true;
+    }
+
+    private void StopAttack()
+    {
+        _attacking = false;
+        _gc.Busy = false;
     }
 }
