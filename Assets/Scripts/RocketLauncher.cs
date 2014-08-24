@@ -5,31 +5,38 @@ public class RocketLauncher : MonoBehaviour {
 
 	public GameObject rocketPrefab;
 
+	public float delay = 0.15f;
+
 	void Start () {
 	
 	}
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			StartCoroutine(SpawnRockets(transform.forward));
+			StartCoroutine(SpawnRockets(transform.forward + transform.parent.position));
 		}
 	}
 
 	public IEnumerator SpawnRockets(Vector3 position) {
-		SpawnRocket (position + new Vector3(0.25f,0.25f,0f));
-		yield return new WaitForSeconds (0.1f);
-		SpawnRocket (position + new Vector3(-0.25f,0.25f,0f));
-		yield return new WaitForSeconds (0.1f);
-		SpawnRocket (position + new Vector3(0.25f,-0.25f,0f));
-		yield return new WaitForSeconds (0.1f);
-		SpawnRocket (position + new Vector3(-0.25f,-0.25f,0f));
-		yield return new WaitForSeconds (0.1f);
+		SpawnRocket (position, new Vector3(0.25f,0.1f,0f));
+		yield return new WaitForSeconds (delay);
+		SpawnRocket (position, new Vector3(-0.25f,0.1f,0f));
+		yield return new WaitForSeconds (delay);
+		SpawnRocket (position, new Vector3(0.25f,-0.25f,0f));
+		yield return new WaitForSeconds (delay);
+		SpawnRocket (position, new Vector3(-0.25f,-0.25f,0f));
+		yield return new WaitForSeconds (delay);
 	}
 
-	public void SpawnRocket(Vector3 finalTarget) {
+	Vector3 GetRandomOffset() {
+		return new Vector3 (Random.Range (-0.07f, 0.07f), Random.Range (-0.07f, 0.07f), Random.Range (-0.07f, 0.07f));
+	}
+
+	public void SpawnRocket(Vector3 finalTarget, Vector3 offset) {
 		Rocket newRocket = ((GameObject)Instantiate (rocketPrefab)).GetComponent<Rocket>();
-		newRocket.path.Add (transform.position);
-		newRocket.path.Add (finalTarget - transform.position + new Vector3(0f,0.25f,0f));
-		newRocket.path.Add (finalTarget + new Vector3(0f,0.25f,0f));
+		newRocket.transform.position = transform.position;
+		newRocket.path.Add (finalTarget + offset + new Vector3(0f,0.1f,0f) + GetRandomOffset());
+		newRocket.path.Add (finalTarget + GetRandomOffset());
+		newRocket.transform.parent = transform;
 	}
 }
