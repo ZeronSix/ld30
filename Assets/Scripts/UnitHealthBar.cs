@@ -23,7 +23,13 @@ public class UnitHealthBar : MonoBehaviour
 
     void Update()
     {
+        if (Unit == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         transform.position = Unit.transform.position + _deltaPos;
-		_foreground.localScale = Vector3.Lerp(_foreground.localScale, new Vector3(Scale * Unit.Health/Unit.MaxHealth, 1, 1), 10f * Time.deltaTime);
+        _foreground.localScale = new Vector3(Scale * Unit.Health/Unit.MaxHealth, 1, 1);
     }
 }

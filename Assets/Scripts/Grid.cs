@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 using System.Collections;
 
@@ -40,25 +41,45 @@ public class Grid : MonoBehaviour
 
             SetCellColor(gridPos, GridSelectionColor);
 
+            if (_gc.Busy) return;
+
             if (Cells[gridX, gridY] != null && Input.GetButtonDown("Select"))
             {
-                _gc.SelectedUnit = Cells[gridX, gridY];
-                _gc.SelectedUnit.EnableBoundingBox();
-            }
-            else if (_gc.SelectedUnit != null)
-            {
-                var path = AStar.FindPath(Cells, WorldToGrid(_gc.SelectedUnit.transform.position), gridPos);
-                while (path.Count > _gc.SelectedUnit.CellMoveCount)
-                    path.RemoveAt(path.Count - 1);
-
-                foreach (var cell in path)
+                if (Cells[gridX, gridY].BattleSide == BattleSide.Humans)
                 {
-                    SetCellColor(cell, Color.red);
+                    _gc.SelectedUnit = Cells[gridX, gridY];
+                    _gc.SelectedUnit.EnableBoundingBox();   
                 }
-
-                if (Input.GetButtonDown("Action"))
+            }
+            else if (_gc.SelectedUnit != null && !_gc.SelectedUnit.Busy)
+            {
+                if (Cells[gridX, gridY] != null && Cells[gridX, gridY].BattleSide == BattleSide.Aliens)
                 {
-                    _gc.SelectedUnit.MoveTo(path);
+                    var distance = (WorldToGrid(_gc.SelectedUnit.transform.position) - new Vector3(gridX, gridY, 0)).magnitude;
+                    if (distance == 1 || distance == Mathf.Sqrt(2))
+                    {
+                        if (Input.GetButtonDown("Action"))
+                        {
+                            _gc.SelectedUnit.Attack(Cells[gridX, gridY]);
+                        }
+                    }
+                }
+                else
+                {
+
+                    var path = AStar.FindPath(Cells, WorldToGrid(_gc.SelectedUnit.transform.position), gridPos);
+                    while (path.Count > _gc.SelectedUnit.CellMoveCount)
+                        path.RemoveAt(path.Count - 1);
+
+                    foreach (var cell in path)
+                    {
+                        SetCellColor(cell, Color.red);
+                    }
+
+                    if (Input.GetButtonDown("Action"))
+                    {
+                        _gc.SelectedUnit.MoveTo(path);
+                    }
                 }
             }
         }
