@@ -78,11 +78,6 @@ public class GalacticGenerator : MonoBehaviour {
 	}
 
 	void Update () {
-		foreach (List<GameObject> system in systems) {
-			for (int i = 1; i < system.Count; i++) {
-				system[i].transform.RotateAround (system[0].transform.position, Vector3.forward, i * 0.3f * 25 * Time.deltaTime);
-				Debug.DrawLine(system[i].transform.position, system[0].transform.position);
-			}
-		}
+
 	}
 }
