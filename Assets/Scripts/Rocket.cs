@@ -8,19 +8,22 @@ public class Rocket : MonoBehaviour {
 
 	public int currentPoint = 0;
 
-	public float nextPointTreshold = 0.2f;
+	public float nextPointTreshold = 0.18f;
 
-	public float rocketSpeed = 4f;
+	public float rocketSpeed = 8f;
+
+	private ParticleSystem particleSystem;
 
 	void Start () {
+		particleSystem = GetComponentsInChildren<ParticleSystem> (true) [0];
 	}
 
 	void Update () {
 		Vector3 pos = path[path.Count-1]-transform.position;
 		Quaternion newRot = Quaternion.LookRotation(pos);
-		transform.rotation = Quaternion.Lerp(transform.rotation, newRot, 10f * Time.deltaTime);
+		transform.rotation = Quaternion.Lerp(transform.rotation, newRot, 5f * Time.deltaTime);
 
-		transform.position = Vector3.Lerp (transform.position, path[currentPoint], rocketSpeed * Time.deltaTime);
+		transform.position = Vector3.Lerp (transform.position, path[currentPoint], rocketSpeed * (currentPoint+1) * Time.deltaTime);
 		if (Vector3.Distance (transform.position, path [currentPoint]) < nextPointTreshold) {
 			if (currentPoint < path.Count-1) currentPoint++;
 			else if (Vector3.Distance (transform.position, path [currentPoint]) < nextPointTreshold / 5f) {
@@ -31,14 +34,14 @@ public class Rocket : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject != transform.parent.parent.gameObject) {
-			Explode();		
+			Explode();	
 		}
 	}
 
 	public void Explode() {
-		GetComponentInChildren<ParticleEmitter> ().emit = true;
-		GetComponentInChildren<ParticleAnimator> ().autodestruct = true;
-		GetComponentInChildren<ParticleEmitter> ().transform.parent = null;
+		particleSystem.gameObject.SetActive (true);
+		particleSystem.gameObject.transform.parent = null;
+		particleSystem.gameObject.transform.position = path[path.Count-1];
 		Destroy (gameObject);
 	}
 }

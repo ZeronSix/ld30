@@ -5,7 +5,7 @@ public class RocketLauncher : MonoBehaviour {
 
 	public GameObject rocketPrefab;
 
-	public float delay = 0.15f;
+	public float delay = 0.18f;
 
 	void Start () {
 	
@@ -18,13 +18,13 @@ public class RocketLauncher : MonoBehaviour {
 	}
 
 	public IEnumerator SpawnRockets(Vector3 position) {
-		SpawnRocket (position, new Vector3(0.25f,0.1f,0f));
+		SpawnRocket (position, new Vector3(0.35f,0.1f,0f));
 		yield return new WaitForSeconds (delay);
-		SpawnRocket (position, new Vector3(-0.25f,0.1f,0f));
+		SpawnRocket (position, new Vector3(-0.35f,0.1f,0f));
 		yield return new WaitForSeconds (delay);
-		SpawnRocket (position, new Vector3(0.25f,-0.25f,0f));
+		SpawnRocket (position, new Vector3(0.35f,-0.25f,0f));
 		yield return new WaitForSeconds (delay);
-		SpawnRocket (position, new Vector3(-0.25f,-0.25f,0f));
+		SpawnRocket (position, new Vector3(-0.35f,-0.25f,0f));
 		yield return new WaitForSeconds (delay);
 	}
 
@@ -35,7 +35,7 @@ public class RocketLauncher : MonoBehaviour {
 	public void SpawnRocket(Vector3 finalTarget, Vector3 offset) {
 		Rocket newRocket = ((GameObject)Instantiate (rocketPrefab)).GetComponent<Rocket>();
 		newRocket.transform.position = transform.position;
-		newRocket.path.Add (finalTarget + offset + new Vector3(0f,0.1f,0f) + GetRandomOffset());
+		newRocket.path.Add (transform.position + offset + new Vector3(0f,-0.35f,0f) + GetRandomOffset());
 		newRocket.path.Add (finalTarget + GetRandomOffset());
 		newRocket.transform.parent = transform;
 	}
