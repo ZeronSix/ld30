@@ -24,6 +24,6 @@ public class UnitHealthBar : MonoBehaviour
     void Update()
     {
         transform.position = Unit.transform.position + _deltaPos;
-        _foreground.localScale = new Vector3(Scale * Unit.Health/Unit.MaxHealth, 1, 1);
+		_foreground.localScale = Vector3.Lerp(_foreground.localScale, new Vector3(Scale * Unit.Health/Unit.MaxHealth, 1, 1), 10f * Time.deltaTime);
     }
 }
