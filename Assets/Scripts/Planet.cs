@@ -22,18 +22,4 @@ public class Planet : MonoBehaviour {
 
 		orbit.transform.RotateAround (orbit.transform.position, Vector3.forward, orbitScale.x * 3 * Time.deltaTime);
 	}
-
-	void OnMouseOver() {
-		Color oldColor = renderer.materials [1].GetColor ("_OutlineColor");
-		renderer.materials [1].SetColor("_OutlineColor", new Color(oldColor.r, 
-		          oldColor.g, 
-		          oldColor.b, 1.0f)); 
-	}
-
-	void OnMouseExit() {
-		Color oldColor = renderer.materials [1].GetColor ("_OutlineColor");
-		renderer.materials [1].SetColor("_OutlineColor", new Color(oldColor.r, 
-		                                                           oldColor.g, 
-		                                                           oldColor.b, 0.0f)); 
-	}
 }
