@@ -9,6 +9,8 @@ public class PlanetTrigger : MonoBehaviour
     private GameObject _alienIcon;
     private GameObject _humanIcon;
 
+    private Vector3 _iconDeltaPos;
+
     void Start()
     {
         if (!enabled)
@@ -16,6 +18,7 @@ public class PlanetTrigger : MonoBehaviour
 
         _gc = GameController.Get();
         _alienIcon = transform.Find("aliens").gameObject;
+        _iconDeltaPos = _alienIcon.transform.localPosition;
         _humanIcon = transform.Find("humans").gameObject;
     }
 
@@ -36,6 +39,11 @@ public class PlanetTrigger : MonoBehaviour
                 _humanIcon.renderer.enabled = false;
                 break;
         }
+
+        _alienIcon.transform.position = transform.position + _iconDeltaPos;
+        _humanIcon.transform.position = transform.position + _iconDeltaPos;
+
+        _alienIcon.transform.rotation = _humanIcon.transform.rotation = Quaternion.identity;
     }
 
     void OnTriggerStay(Collider other)
