@@ -5,6 +5,9 @@ public class CameraController : MonoBehaviour
 {
     public float Speed;
 
+	public float DefaultFieldOfView = 80;
+	public float SpecialFieldOfView = 80;
+
     void Update()
     {
         if (Input.GetButton("DragMouse"))
@@ -14,9 +17,11 @@ public class CameraController : MonoBehaviour
 
 		if (GameObject.FindWithTag ("StarSystemController").GetComponent<StarSystemController> ().gameState == StarSystemController.GameState.SYSTEM_VIEW) {
 			ZoomIn (GameObject.FindWithTag ("StarSystemController").GetComponent<StarSystemController> ().selectedSystem.transform.position);
+			LerpToDefaultFieldOfView();
 		} 
 		else {
 			ZoomOut();
+			LerpToSpecialFieldOfView();
 		}
     }
 
@@ -33,5 +38,13 @@ public class CameraController : MonoBehaviour
 	public void ZoomOut()
 	{
 		transform.position = new Vector3 (transform.position.x, transform.position.y, Mathf.Lerp (transform.position.z, -15f, Speed * Time.deltaTime));
+	}
+
+	public void LerpToDefaultFieldOfView() {
+		camera.fieldOfView = Mathf.Lerp (camera.fieldOfView, DefaultFieldOfView, 10f * Time.deltaTime);
+	}
+
+	public void LerpToSpecialFieldOfView() {
+		camera.fieldOfView = Mathf.Lerp (camera.fieldOfView, SpecialFieldOfView, 10f * Time.deltaTime);
 	}
 }
