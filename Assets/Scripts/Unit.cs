@@ -168,7 +168,6 @@ public class Unit : MonoBehaviour
         {
             if (tr.tag == "Weapon")
             {
-                Debug.Log("MEME");
                 tr.GetComponent<Weapon>().Shoot(enemy.transform.position);
             }
         }
