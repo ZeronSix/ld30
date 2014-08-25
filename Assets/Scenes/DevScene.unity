@@ -109,6 +109,7 @@ MonoBehaviour:
   Speed: 18
   DefaultZ: -25
   SpecialZ: -25
+  Center: {x: 0, y: 0}
 --- !u!81 &69029444
 AudioListener:
   m_ObjectHideFlags: 0

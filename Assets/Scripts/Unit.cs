@@ -181,4 +181,24 @@ public class Unit : MonoBehaviour
         Moved = false;
         Busy = false;
     }
+
+    public Vector3 GetClosestEmptyPlanetPos(Vector3 worldPos)
+    {
+        var closestPos = -Vector3.one;
+        var unitGridPos = _grid.WorldToGrid(transform.position);
+
+        foreach (var planet in GameObject.FindGameObjectsWithTag("Planet")) {
+            var planetComp = planet.GetComponent<PlanetTrigger>();
+            var gridPos = _grid.WorldToGrid(worldPos);
+
+            if (planetComp.ContestedBy == BattleSide.None) {
+                if (closestPos == -Vector3.one ||
+                    (unitGridPos - gridPos).sqrMagnitude < (closestPos - gridPos).sqrMagnitude) {
+                    closestPos = gridPos;
+                }
+            }
+        }
+
+        return closestPos;
+    }
 }
