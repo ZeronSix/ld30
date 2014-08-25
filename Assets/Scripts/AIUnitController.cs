@@ -37,6 +37,10 @@ public class AIUnitController : MonoBehaviour
         if (foundUnit != null)
         {
             var path = AStar.FindPath(_grid.Cells, _grid.WorldToGrid(transform.position), _grid.WorldToGrid(foundUnit.transform.position));
+
+            if (path == null)
+                return;
+
             while (path.Count > _gc.SelectedUnit.CellMoveCount)
                 path.RemoveAt(path.Count - 1);
 

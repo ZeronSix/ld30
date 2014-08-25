@@ -151,6 +151,7 @@ public class Grid : MonoBehaviour
         foreach (var unit in GameObject.FindGameObjectsWithTag("Unit"))
         {
             var unitComp = unit.GetComponent<Unit>();
+
             if (unitComp.BattleSide == side && unitComp.Type == type)
             {
                 var unitGridPos = WorldToGrid(unit.transform.position);
