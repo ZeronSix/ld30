@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RocketLauncher : MonoBehaviour {
+public class RocketLauncher : Weapon {
 
 	public GameObject rocketPrefab;
 
@@ -12,10 +12,13 @@ public class RocketLauncher : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			StartCoroutine(SpawnRockets(transform.forward + transform.parent.position));
-		}
+
 	}
+
+    public override void Shoot(Vector3 target)
+    {
+        StartCoroutine(SpawnRockets(-transform.forward + transform.parent.position));
+    }
 
 	public IEnumerator SpawnRockets(Vector3 position) {
 		SpawnRocket (position, new Vector3(0.35f,0.1f,0f));

@@ -24,13 +24,13 @@ public class AIUnitController : MonoBehaviour
         switch (_unit.Type)
         {
             case UnitType.Assault:
-                foundUnit = _grid.FindClosestUnitOfType(_grid.WorldToGrid(transform.position), UnitType.Cruiser, BattleSide.Humans);
+                foundUnit = _grid.FindClosestUnit(_grid.WorldToGrid(transform.position), BattleSide.Humans);
                 break;
             case UnitType.Cruiser:
                 foundPlanet = GetClosestEmptyPlanetPos();
                 break;
             case UnitType.Fighter:
-                foundUnit = _grid.FindClosestUnitOfType(_grid.WorldToGrid(transform.position), UnitType.Assault, BattleSide.Humans);
+                foundUnit = _grid.FindClosestUnit(_grid.WorldToGrid(transform.position), BattleSide.Humans);
                 break;
         }
 

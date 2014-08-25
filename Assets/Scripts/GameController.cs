@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public int PlayerReinforcements = 5;
     public float PlayerUnitCount = 0;
     public int TurnCount = 0;
+    public int ReinforceIncrementTurns = 5;
 
     private Grid _grid;
     private AlienMothership _aiSpawner;
@@ -79,6 +80,19 @@ public class GameController : MonoBehaviour
             {
                 ai.DoTurn();
             }
+        }
+
+        if (TurnCount != 0 && TurnCount % ReinforceIncrementTurns == 0)
+        {
+            int planetsContested = 0;
+
+            foreach (var planet in Planets)
+            {
+                if (planet.GetComponent<PlanetTrigger>().ContestedBy == BattleSide.Humans)
+                    planetsContested++;
+            }
+
+            PlayerReinforcements += planetsContested;
         }
 
         if (TurnCount != 0 && TurnCount % _aiSpawner.SpawnTurnCount == 0 && _grid.Cells[_grid.Width - 1, _grid.Height - 1] == null) {

@@ -166,4 +166,25 @@ public class Grid : MonoBehaviour
 
         return unitToReturn;
     }
+
+    public Unit FindClosestUnit(Vector3 gridPos, BattleSide side)
+    {
+        Unit unitToReturn = null;
+        Vector3 closestPos = -Vector3.one;
+
+        foreach (var unit in GameObject.FindGameObjectsWithTag("Unit")) {
+            var unitComp = unit.GetComponent<Unit>();
+
+            if (unitComp.BattleSide == side) {
+                var unitGridPos = WorldToGrid(unit.transform.position);
+
+                if (closestPos == -Vector3.one || (unitGridPos - gridPos).sqrMagnitude < (closestPos - gridPos).sqrMagnitude) {
+                    closestPos = unitGridPos;
+                    unitToReturn = unitComp;
+                }
+            }
+        }
+
+        return unitToReturn;
+    }
 }
