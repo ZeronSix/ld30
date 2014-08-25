@@ -16,6 +16,6 @@ public class MouseOverHighlighter : MonoBehaviour
         Color oldColor = renderer.materials[1].GetColor("_OutlineColor");
         renderer.materials[1].SetColor("_OutlineColor", new Color(oldColor.r,
                                                                    oldColor.g,
-                                                                   oldColor.b, 0.0f));
+		                                                          oldColor.b, 0.0f));
     }
 }

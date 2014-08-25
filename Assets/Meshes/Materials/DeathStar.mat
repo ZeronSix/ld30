@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Orbit
-  m_Shader: {fileID: 10753, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: DeathStar
+  m_Shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,20 +17,12 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 0a6c7bd345aa684458a10429f51b3e83, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: b4ad09bdafb7885488cc7d55c5fd9a8d, type: 3}
+          m_Scale: {x: 5, y: 5}
           m_Offset: {x: 0, y: 0}
-    m_Floats:
-      data:
-        first:
-          name: _Cutoff
-        second: 1
-      data:
-        first:
-          name: PixelSnap
-        second: 0
+    m_Floats: {}
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: .270588249}
+        second: {r: 1, g: 1, b: 1, a: 1}
