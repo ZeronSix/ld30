@@ -41,7 +41,7 @@ public class AIUnitController : MonoBehaviour
             if (path == null)
                 return;
 
-            while (path.Count > _gc.SelectedUnit.CellMoveCount)
+            while (path.Count > _unit.CellMoveCount)
                 path.RemoveAt(path.Count - 1);
 
             _unit.MoveTo(path);
