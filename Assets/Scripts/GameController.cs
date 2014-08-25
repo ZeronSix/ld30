@@ -16,10 +16,12 @@ public class GameController : MonoBehaviour
     public int TurnCount = 0;
 
     private Grid _grid;
+    private AlienMothership _aiSpawner;
 	
 	void Awake()
 	{
 	    _grid = Grid.Get();
+	    _aiSpawner = AlienMothership.Get();
         StartMission();
 
 	    var units = GameObject.FindGameObjectsWithTag("Unit");
@@ -78,6 +80,10 @@ public class GameController : MonoBehaviour
             {
                 ai.DoTurn();
             }
+        }
+
+        if (TurnCount != 0 && TurnCount % _aiSpawner.SpawnTurnCount == 0 && _grid.Cells[_grid.Width - 1, _grid.Height - 1] == null) {
+            _aiSpawner.Spawn();
         }
     }
 

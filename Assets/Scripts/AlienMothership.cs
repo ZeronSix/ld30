@@ -20,18 +20,15 @@ public class AlienMothership : MonoBehaviour
         Spawn();
     }
 
-    void Update()
-    {
-        if (_gc.TurnCount != 0 && _gc.TurnCount%SpawnTurnCount == 0 && _grid.Cells[_grid.Width - 1, _grid.Height - 1] == null)
-        {
-            Spawn();
-        }
-    }
-
-    private void Spawn()
+    public void Spawn()
     {
         var pos = _grid.GridToWorld(new Vector2(_grid.Width - 1, _grid.Height - 1));
         pos.z = 5;
         Instantiate(ObjectPrefabs[Random.Range(0, ObjectPrefabs.Length - 1)], pos, Quaternion.identity);
+    }
+
+    public static AlienMothership Get()
+    {
+        return GameObject.FindGameObjectWithTag("AlienMothership").GetComponent<AlienMothership>();
     }
 }

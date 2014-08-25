@@ -11,9 +11,10 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 135: {fileID: 13500000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: DeathStarSpawner
-  m_TagString: Untagged
+  m_TagString: AlienMothership
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,6 +59,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 4300000, guid: 968c9a12a2406af4aabde6a0c320cffc, type: 3}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b05944b5c70f84797f07f120ef0d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnTurnCount: 3
+  ObjectPrefabs:
+  - {fileID: 100004, guid: 509e6152595915b4494fda56902119b3, type: 2}
+  - {fileID: 100000, guid: ce0d0146b1bc56443ba4becda2747b43, type: 2}
+  - {fileID: 100002, guid: 3fbaa2fd472de534392eecd02e7e75b4, type: 2}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
