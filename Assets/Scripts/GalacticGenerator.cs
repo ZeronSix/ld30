@@ -37,7 +37,7 @@ public class GalacticGenerator : MonoBehaviour {
 
 		for (int i = 0; i < bodies; i++) {
 			GameObject newBody = null;
-			if (i != 0) {
+			if (i != 0) { //Planets
 				newBody = (GameObject)Instantiate(planets[i-1], CirclePosition((i * distance) + distance, rootPosition, Random.value * 360), Quaternion.identity);
 
 				newBody.name = "Planet " + i.ToString();
@@ -54,11 +54,13 @@ public class GalacticGenerator : MonoBehaviour {
 
 				orbit.transform.localScale = newBody.GetComponent<Planet>().orbitScale * 0.5f;
 			}
-			else {
+			else { //Star
 				newBody = (GameObject)Instantiate(sunPrefab, rootPosition, Quaternion.identity);
 
 				newBody.name = "Sun " + (systems.Count+1).ToString();
 				newBody.transform.localScale = Vector3.one * 2f;
+
+				DontDestroyOnLoad(newBody);
 			}
 
 			newSystem.Add (newBody);
@@ -69,7 +71,7 @@ public class GalacticGenerator : MonoBehaviour {
 
 	void OnGUI() {
 		if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.ViewState.GALACTIC_VIEW && maxSystems > systems.Count) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 170, 200, 100), "Generate System")) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 170, 200, 75), "Scan for System")) {
 				Vector3 newPosition = new Vector3();
 				bool systemGenerated = false;
 				bool noConflicts = true;
@@ -105,10 +107,26 @@ public class GalacticGenerator : MonoBehaviour {
 				GameObject.FindWithTag("MainCamera").GetComponent<CameraController>().Center = center;
 			}
 		}
+		else if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.ViewState.SYSTEM_VIEW &&
+		         !GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem.connected) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 100, 200, 75), "Start")) {
+				foreach (List<GameObject> system in systems) {
+					system[0].SetActive(false);
+				}
+				GameObject.FindWithTag("Orbits").SetActive(false);
+				gameObject.SetActive(false);
+
+				Application.LoadLevel("BattleScene");
+			}
+		}
 	}
 	
 	void Start () {
+		DontDestroyOnLoad (gameObject);
+		DontDestroyOnLoad (GameObject.FindWithTag("Orbits"));
+
 		GenerateSystem (Vector3.zero);
+		systems [0] [0].GetComponent<Sun> ().connected = true;
 	}
 
 	void Update () {

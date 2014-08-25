@@ -15,7 +15,7 @@ public class Planet : MonoBehaviour {
 	}
 	
 	void Update () {
-		transform.RotateAround (transform.position, Vector3.forward, 9 * Time.deltaTime);
+		transform.RotateAround (transform.position, Vector3.forward, 14 * Time.deltaTime);
 		transform.RotateAround (transform.parent.position, Vector3.forward, 0.3f * 25f * Time.deltaTime / (Vector3.Distance(transform.position, transform.parent.position) * 0.05f));
 
 		orbit.transform.RotateAround (orbit.transform.position, Vector3.forward, orbitScale.x * 3 * Time.deltaTime);

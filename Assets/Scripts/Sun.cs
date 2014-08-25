@@ -8,10 +8,12 @@ public class Sun : MonoBehaviour {
 	public float galacticLightRange = 3.0f;
 	public float systemLightRange = 300f;
 
+	public bool connected = false;
+
 	void Start () {
 		starSystemController = GameObject.FindWithTag ("StarSystemController").GetComponent<StarSystemController> ();
 
-
+		DontDestroyOnLoad (gameObject);
 	}
 
 	void OnMouseDown() {
