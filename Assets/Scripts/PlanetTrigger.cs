@@ -9,7 +9,7 @@ public class PlanetTrigger : MonoBehaviour
     private GameObject _alienIcon;
     private GameObject _humanIcon;
 
-    void Awake()
+    void Start()
     {
         if (!enabled)
             return;
