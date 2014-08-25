@@ -23,10 +23,11 @@ public class BattleShip : MonoBehaviour
     public void PlayAttackAnimation()
     {
         GetComponent<Animator>().SetTrigger("Attack");
+
     }
 
     public void TriggerAttack()
     {
-        BattleController.Global.StartAttack(Unit.BattleSide);
+        
     }
 }

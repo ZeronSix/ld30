@@ -4,5 +4,6 @@ using System.Collections;
 public enum BattleSide
 {
     Humans = 1,
-    Aliens = 2
+    Aliens = 2,
+    None
 }

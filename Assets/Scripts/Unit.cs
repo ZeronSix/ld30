@@ -30,6 +30,10 @@ public class Unit : MonoBehaviour
     public float      BaseDamage;
     public float      OrbitDistance;
     public bool       Busy = false;
+    public bool       Attacked = false;
+    public bool       Moved = false;
+    public bool       InAnimation = false;
+
 
     public DamageMultiplier DamageMultiplier;
     public Transform Target;
@@ -39,7 +43,6 @@ public class Unit : MonoBehaviour
     private Grid _grid;
     private GameObject _bBox;
     private List<Vector2> pathNodes = null;
-    private bool _attacking = false;
 
     void Awake()
     {
@@ -54,13 +57,17 @@ public class Unit : MonoBehaviour
 
         _grid.Cells[(int) gridPos.x, (int) gridPos.y] = null;
 
+        if (Attacked && Moved)
+            Busy = true;
+
         if (pathNodes != null)
         {
             if (pathNodes.Count == 0)
             {
                 pathNodes = null;
-                if (!_attacking)
-                    _gc.Busy = false;
+                InAnimation = false;
+                _gc.Busy = false;
+
                 return;
             }
 
@@ -73,6 +80,21 @@ public class Unit : MonoBehaviour
                 transform.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
 
                 pathNodes.RemoveAt(0);
+                if (pathNodes.Count > 0)
+                {
+                    if (_grid.Cells[(int) pathNodes[0].x, (int) pathNodes[0].y] != null)
+                    {
+                        if (_grid.Cells[(int) pathNodes[0].x, (int) pathNodes[0].y].BattleSide != BattleSide)
+                        {
+                            Attack(_grid.Cells[(int) pathNodes[0].x, (int) pathNodes[0].y]);
+                            pathNodes.RemoveAt(0);
+                        }
+                    }
+                }
+                else
+                {
+                    Moved = true;
+                }
             }
         }
 
@@ -94,12 +116,12 @@ public class Unit : MonoBehaviour
     {
         pathNodes = positions;
         _gc.Busy = true;
-        Busy = true;
+        InAnimation = true;
     }
 
-    public void EnableBoundingBox()
+    public void EnableBoundingBox(bool enabled)
     {
-        _bBox.SetActive(true);
+        _bBox.SetActive(enabled);
     }
 
     private static float CalculateSpecialDamageMults(Unit unit, Unit enemy)
@@ -124,14 +146,16 @@ public class Unit : MonoBehaviour
         enemy.TakeDamage(this.BaseDamage * CalculateSpecialDamageMults(this, enemy));
         this.TakeDamage(enemy.BaseDamage * CalculateSpecialDamageMults(enemy, this) * enemy.DamageMultiplier.Defense);
         _gc.Busy = true;
-        Busy = true;
 
+        Attacked = true;
         PlayAttackAnimation(enemy);
     }
 
     public void Die()
     {
         Destroy(gameObject);
+        if (BattleSide == BattleSide.Humans)
+            _gc.PlayerUnitCount--;
     }
 
     public void PlayAttackAnimation(Unit enemy)
@@ -139,13 +163,22 @@ public class Unit : MonoBehaviour
         // TODO: weapons
         Invoke("StopAttack", _gc.AttackDuration);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(enemy.transform.position.y - transform.position.y, enemy.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90));
-        _attacking = true;
-        _gc.Busy = true;
+
+        InAnimation = true;
     }
 
     private void StopAttack()
     {
-        _attacking = false;
+        Attacked = false;
         _gc.Busy = false;
+        InAnimation = false;
+    }
+
+    public void PrepareForNextTurn()
+    {
+        InAnimation = false;
+        Attacked = false;
+        Moved = false;
+        Busy = false;
     }
 }

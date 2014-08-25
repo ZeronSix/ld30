@@ -8,7 +8,7 @@ public class Planet : MonoBehaviour {
 
 	public GameObject orbit;
 	public Vector3 orbitScale;
-
+    
 	public float realScale = 1f;
 
 	void Start () {
