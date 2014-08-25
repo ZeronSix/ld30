@@ -33,7 +33,8 @@ public class Rocket : MonoBehaviour {
 	}	
 
 	public void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject != transform.parent.parent.gameObject) {
+		if (collision.gameObject != transform.parent.parent.gameObject &&
+		    collision.gameObject.tag != "Grid") {
 			Explode();	
 		}
 	}

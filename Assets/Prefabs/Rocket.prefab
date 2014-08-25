@@ -30,6 +30,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: HitExplosion
   m_TagString: Untagged
@@ -131,6 +132,17 @@ MonoBehaviour:
   currentPoint: 0
   nextPointTreshold: .200000003
   rocketSpeed: .100000001
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf603af6f70c3b419db099909d64950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

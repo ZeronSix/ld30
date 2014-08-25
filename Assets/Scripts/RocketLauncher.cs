@@ -12,7 +12,9 @@ public class RocketLauncher : Weapon {
 	}
 
 	void Update () {
-
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			Shoot(new Vector3());
+		}
 	}
 
     public override void Shoot(Vector3 target)
