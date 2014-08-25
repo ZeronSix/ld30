@@ -6,18 +6,12 @@ using System.Linq;
 
 public class Planet : MonoBehaviour {
 
-	//private GameController gameController;
-
 	public GameObject orbit;
 	public Vector3 orbitScale;
     
 	public float realScale = 1f;
 
-    private GameController gc;
-
-	void Start ()
-	{
-	    gc = GameController.Get();
+	void Start () {
 	}
 	
 	void Update () {
@@ -31,8 +25,8 @@ public class Planet : MonoBehaviour {
     {
         if (Input.GetButtonDown("Action"))
         {
-            if (gc.SelectedUnit)
-                gc.SelectedUnit.Target = transform;
+//            if (gc.SelectedUnit)
+//                gc.SelectedUnit.Target = transform;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,6 +18,8 @@ public class GalacticGenerator : MonoBehaviour {
 
 	public int minBodies = 3;
 	public int maxBodies = 5;
+
+	public int maxSystems = 6;
 
 	GameObject GetRandomPlanet() {
 		return planets[Random.Range(0, planets.Count)];
@@ -68,13 +70,42 @@ public class GalacticGenerator : MonoBehaviour {
 
 		systems.Add (newSystem);
 	}
+
+	void OnGUI() {
+		if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.GameState.GALACTIC_VIEW) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 170, 200, 100), "Generate System") && maxSystems > systems.Count) {
+				Vector3 newPosition;
+				bool systemGenerated = false;
+				bool noConflicts = true;
+
+				while (!systemGenerated) {
+					noConflicts = true;
+
+					float x = Random.Range(0.05f, 0.8f);
+					float y = Random.Range(0.05f, 0.8f);
+					newPosition = new Vector3(x, y, -Camera.main.transform.position.z);
+					newPosition = Camera.main.ViewportToWorldPoint(newPosition);
+
+					foreach (List<GameObject> system in systems) {
+						if (Vector3.Distance(system[0].transform.position, newPosition) < 4f * maxDistance) {
+							noConflicts = false;
+						}
+					}
+
+					if (noConflicts) {
+						GenerateSystem (newPosition);
+						systemGenerated = true;
+						break;
+					}
+				}
+
+				GameObject.FindWithTag("MainCamera").GetComponent<CameraController>().SpecialFieldOfView = 80f + (systems.Count*5f);
+			}
+		}
+	}
 	
 	void Start () {
 		GenerateSystem (Vector3.zero);
-		GenerateSystem (new Vector3(10f, 0f, 0f));
-		GenerateSystem (new Vector3(5f, 9f, 0f));
-		GenerateSystem (new Vector3(-9f, 5f, 0f));
-		GenerateSystem (new Vector3(4f, -9f, 0f));
 	}
 
 	void Update () {
