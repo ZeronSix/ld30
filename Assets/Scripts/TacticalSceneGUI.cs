@@ -29,7 +29,7 @@ public class TacticalSceneGUI : MonoBehaviour
 
         if (Enabled)
         {
-            GUILayout.BeginArea(new Rect(Screen.width * 0.05f, Screen.height - 250, 200, 200));
+            GUILayout.BeginArea(new Rect(Screen.width * 0.05f, Screen.height - 300, 200, 300));
             GUILayout.BeginVertical();
             if (GUILayout.Button("NEXT TURN", GUILayout.Height(50.0f)))
                 {

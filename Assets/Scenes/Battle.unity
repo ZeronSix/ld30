@@ -84,6 +84,7 @@ GameObject:
   - 4: {fileID: 12690993}
   - 120: {fileID: 12690995}
   - 114: {fileID: 12690994}
+  - 82: {fileID: 12690996}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Weapon
@@ -115,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ee2ff39a3cae64486d6a0656308218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTime: 1
+  laserTime: .200000003
   laserBeamColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &12690995
 LineRenderer:
@@ -151,6 +152,65 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!82 &12690996
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200002, guid: 94353bde3051d28498baef07a0775566,
+    type: 2}
+  m_PrefabInternal: {fileID: 694601397}
+  m_GameObject: {fileID: 12690992}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 496c2d4c24d444d438113143991bbfd8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &13544337
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,6 +457,7 @@ MonoBehaviour:
   Attacked: 0
   Moved: 0
   InAnimation: 0
+  DieSound: {fileID: 8300000, guid: 25922069a85196c449cdb3f5b601694d, type: 3}
   DamageMultiplier:
     Defense: .300000012
     DamageAgainstCruisers: 1
@@ -1662,6 +1723,7 @@ GameObject:
   - 4: {fileID: 256546173}
   - 120: {fileID: 256546175}
   - 114: {fileID: 256546174}
+  - 82: {fileID: 256546176}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Weapon
@@ -1693,7 +1755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ee2ff39a3cae64486d6a0656308218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTime: 1
+  laserTime: .200000003
   laserBeamColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &256546175
 LineRenderer:
@@ -1729,6 +1791,65 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!82 &256546176
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 0cc8f50dc05b48c41a64b9e7c6bd06cd,
+    type: 2}
+  m_PrefabInternal: {fileID: 2093969344}
+  m_GameObject: {fileID: 256546172}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 496c2d4c24d444d438113143991bbfd8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &269141141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,6 +2869,7 @@ MonoBehaviour:
   Attacked: 0
   Moved: 0
   InAnimation: 0
+  DieSound: {fileID: 8300000, guid: 25922069a85196c449cdb3f5b601694d, type: 3}
   DamageMultiplier:
     Defense: .300000012
     DamageAgainstCruisers: 1
@@ -2794,6 +2916,7 @@ GameObject:
   - 4: {fileID: 1093464163}
   - 120: {fileID: 1093464165}
   - 114: {fileID: 1093464164}
+  - 82: {fileID: 1093464166}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Weapon
@@ -2825,7 +2948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ee2ff39a3cae64486d6a0656308218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTime: 1
+  laserTime: .200000003
   laserBeamColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &1093464165
 LineRenderer:
@@ -2861,6 +2984,65 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!82 &1093464166
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 9c24ad978a229754d9b2c317346804c9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1379475494}
+  m_GameObject: {fileID: 1093464162}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 496c2d4c24d444d438113143991bbfd8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1107057175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,6 +3246,7 @@ GameObject:
   - 4: {fileID: 1206768855}
   - 120: {fileID: 1206768857}
   - 114: {fileID: 1206768856}
+  - 82: {fileID: 1206768858}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Weapon
@@ -3095,7 +3278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ee2ff39a3cae64486d6a0656308218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTime: 1
+  laserTime: .200000003
   laserBeamColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &1206768857
 LineRenderer:
@@ -3131,6 +3314,65 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!82 &1206768858
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200002, guid: 0cc8f50dc05b48c41a64b9e7c6bd06cd,
+    type: 2}
+  m_PrefabInternal: {fileID: 2093969344}
+  m_GameObject: {fileID: 1206768854}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 496c2d4c24d444d438113143991bbfd8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1206880699
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,6 +3416,7 @@ MonoBehaviour:
   Attacked: 0
   Moved: 0
   InAnimation: 0
+  DieSound: {fileID: 8300000, guid: 25922069a85196c449cdb3f5b601694d, type: 3}
   DamageMultiplier:
     Defense: .300000012
     DamageAgainstCruisers: 1
@@ -3845,7 +4088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcfad9945559ca4409bc74ecac1705e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 15
 --- !u!1 &1611901962
 GameObject:
   m_ObjectHideFlags: 0
@@ -3907,6 +4150,7 @@ GameObject:
   - 4: {fileID: 1641289437}
   - 120: {fileID: 1641289439}
   - 114: {fileID: 1641289438}
+  - 82: {fileID: 1641289440}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Weapon
@@ -3938,7 +4182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ee2ff39a3cae64486d6a0656308218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTime: 1
+  laserTime: .200000003
   laserBeamColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &1641289439
 LineRenderer:
@@ -3974,6 +4218,65 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!82 &1641289440
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 9c24ad978a229754d9b2c317346804c9,
+    type: 2}
+  m_PrefabInternal: {fileID: 773933999}
+  m_GameObject: {fileID: 1641289436}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 496c2d4c24d444d438113143991bbfd8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1662411026
 GameObject:
   m_ObjectHideFlags: 0
@@ -4089,6 +4392,7 @@ MonoBehaviour:
   Attacked: 0
   Moved: 0
   InAnimation: 0
+  DieSound: {fileID: 8300000, guid: 25922069a85196c449cdb3f5b601694d, type: 3}
   DamageMultiplier:
     Defense: .300000012
     DamageAgainstCruisers: 1
@@ -5423,6 +5727,7 @@ GameObject:
   - 4: {fileID: 2037071379}
   - 120: {fileID: 2037071381}
   - 114: {fileID: 2037071380}
+  - 82: {fileID: 2037071382}
   m_Layer: 0
   m_Name: LaserGun
   m_TagString: Weapon
@@ -5454,7 +5759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ee2ff39a3cae64486d6a0656308218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserTime: 1
+  laserTime: .200000003
   laserBeamColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!120 &2037071381
 LineRenderer:
@@ -5490,6 +5795,65 @@ LineRenderer:
       serializedVersion: 2
       rgba: 4294967295
   m_UseWorldSpace: 1
+--- !u!82 &2037071382
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: 94353bde3051d28498baef07a0775566,
+    type: 2}
+  m_PrefabInternal: {fileID: 694601397}
+  m_GameObject: {fileID: 2037071378}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 496c2d4c24d444d438113143991bbfd8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &2041631668
 GameObject:
   m_ObjectHideFlags: 0

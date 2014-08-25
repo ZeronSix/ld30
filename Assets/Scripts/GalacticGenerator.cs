@@ -21,6 +21,8 @@ public class GalacticGenerator : MonoBehaviour {
 
 	public int maxSystems = 6;
 
+	public GUISkin skin;
+
 	Vector3 CirclePosition(float radius, Vector3 center, float angle) {
 		Vector3 position = Vector3.zero;
 		position.x = center.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
@@ -70,8 +72,9 @@ public class GalacticGenerator : MonoBehaviour {
 	}
 
 	void OnGUI() {
+		GUI.skin = skin;
 		if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.ViewState.GALACTIC_VIEW && maxSystems > systems.Count) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 170, 200, 75), "Scan for System")) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 100, 200, 75), "SCAN FOR SYSTEM")) {
 				Vector3 newPosition = new Vector3();
 				bool systemGenerated = false;
 				bool noConflicts = true;
@@ -122,7 +125,7 @@ public class GalacticGenerator : MonoBehaviour {
 							caption.renderer.enabled = false;
 						}
 
-						system[0].transform.position = new Vector3(10f, 10f, 2f);
+						system[0].transform.position = new Vector3(10f, 10f, 1.5f);
 						foreach (Transform child in system[0].transform) {
 							if (child.gameObject.name != "Caption") {
 								child.gameObject.GetComponent<Planet>().enabled = false;

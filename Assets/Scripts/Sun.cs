@@ -41,6 +41,9 @@ public class Sun : MonoBehaviour {
 		caption.transform.rotation = Quaternion.identity;
 		caption.transform.position = transform.position + new Vector3 (0f,1.4f,0f);
 
+		caption.text = name;
+		if (connected) caption.text = "*" + name + "*";
+
 		foreach (Transform planet in transform) {
 			if (planet.gameObject != caption.gameObject) {
 				Planet planetComponent = planet.GetComponent<Planet>();
