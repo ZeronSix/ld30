@@ -34,6 +34,8 @@ public class Unit : MonoBehaviour
     public bool       Moved = false;
     public bool       InAnimation = false;
 
+	public AudioClip  DieSound;
+
 
     public DamageMultiplier DamageMultiplier;
     public Transform Target;
@@ -153,6 +155,7 @@ public class Unit : MonoBehaviour
 
     public void Die()
     {
+		AudioSource.PlayClipAtPoint (DieSound, transform.position);
         Destroy(gameObject);
         if (BattleSide == BattleSide.Humans)
             _gc.PlayerUnitCount--;

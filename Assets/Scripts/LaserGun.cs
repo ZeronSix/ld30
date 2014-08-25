@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Timers;
+
+[RequireComponent(typeof(AudioSource))]
 public class LaserGun : Weapon {
 
 	public float laserTime = 1.0f;
@@ -27,6 +29,7 @@ public class LaserGun : Weapon {
 		lineRenderer.enabled = true;
 		lineRenderer.SetPosition (0, transform.position);
 		lineRenderer.SetPosition (1, target);
+		audio.Play ();
 		Invoke ("HideLaser", laserTime);
 	}
 

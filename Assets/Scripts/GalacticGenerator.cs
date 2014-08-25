@@ -133,7 +133,7 @@ public class GalacticGenerator : MonoBehaviour {
 				GameObject.FindWithTag("Orbits").SetActive(false);
 				gameObject.SetActive(false);
 
-				Application.LoadLevel("GridTest");
+				Application.LoadLevel("Battle");
 			}
 		}
 	}

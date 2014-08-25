@@ -48,6 +48,6 @@ public class MenuFader : MonoBehaviour
             yield return null;
         }
 
-        Application.LoadLevel("DevScene");
+        Application.LoadLevel("Galactic");
     }
 }

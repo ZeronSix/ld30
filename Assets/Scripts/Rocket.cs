@@ -42,6 +42,7 @@ public class Rocket : MonoBehaviour {
 		particleSystem.gameObject.SetActive (true);
 		particleSystem.gameObject.transform.parent = null;
 		particleSystem.gameObject.transform.position = path[path.Count-1];
+		particleSystem.gameObject.audio.Play ();
 		Destroy (gameObject);
 	}
 }
