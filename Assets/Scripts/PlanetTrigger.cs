@@ -11,6 +11,9 @@ public class PlanetTrigger : MonoBehaviour
 
     void Awake()
     {
+        if (!enabled)
+            return;
+
         _gc = GameController.Get();
         _alienIcon = transform.Find("aliens").gameObject;
         _humanIcon = transform.Find("humans").gameObject;
@@ -21,16 +24,16 @@ public class PlanetTrigger : MonoBehaviour
         switch (ContestedBy)
         {
             case BattleSide.Aliens:
-                _alienIcon.SetActive(true);
-                _humanIcon.SetActive(false);
+                _alienIcon.renderer.enabled = true;
+                _humanIcon.renderer.enabled = false;
                 break;
             case BattleSide.Humans:
-                _alienIcon.SetActive(false);
-                _humanIcon.SetActive(true);
+                _alienIcon.renderer.enabled = false;
+                _humanIcon.renderer.enabled = true;
                 break;
             case BattleSide.None:
-                _alienIcon.SetActive(false);
-                _humanIcon.SetActive(false);
+                _alienIcon.renderer.enabled = false;
+                _humanIcon.renderer.enabled = false;
                 break;
         }
     }
@@ -44,5 +47,10 @@ public class PlanetTrigger : MonoBehaviour
                 ContestedBy = other.GetComponent<Unit>().BattleSide;
             }
         }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        ContestedBy = BattleSide.None;
     }
 }

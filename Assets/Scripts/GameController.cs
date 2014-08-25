@@ -17,24 +17,29 @@ public class GameController : MonoBehaviour
 
     private Grid _grid;
     private AlienMothership _aiSpawner;
-	
-	void Awake()
-	{
-	    _grid = Grid.Get();
-	    _aiSpawner = AlienMothership.Get();
+
+    private void Awake()
+    {
+        _grid = Grid.Get();
+        _aiSpawner = AlienMothership.Get();
         StartMission();
 
-	    var units = GameObject.FindGameObjectsWithTag("Unit");
-	    foreach (var unit in units)
-	    {
-	        if (unit.GetComponent<Unit>().BattleSide == BattleSide.Humans)
-	        {
-	            PlayerUnitCount++;
-	        }
-	    }
-	}
+        var units = GameObject.FindGameObjectsWithTag("Unit");
+        foreach (var unit in units)
+        {
+            if (unit.GetComponent<Unit>().BattleSide == BattleSide.Humans)
+            {
+                PlayerUnitCount++;
+            }
+        }
 
-	void Update () 
+        foreach (var planet in GameObject.FindGameObjectsWithTag("Planet"))
+        {
+            planet.GetComponent<PlanetTrigger>().enabled = true;
+        }
+    }
+
+    void Update () 
     {
 
 	    var win = true;

@@ -109,7 +109,7 @@ public class GalacticGenerator : MonoBehaviour {
 		}
 		else if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.ViewState.SYSTEM_VIEW &&
 		         !GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem.connected) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 100, 200, 75), "Start")) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 100, 200, 75), "START")) {
 				foreach (List<GameObject> system in systems) {
 					if (system[0].GetComponent<Sun>() != GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem) {
 						system[0].SetActive(false);
@@ -123,6 +123,9 @@ public class GalacticGenerator : MonoBehaviour {
 							if (child.gameObject.name == "Caption") child.gameObject.renderer.enabled = false;
 							else {
 								child.gameObject.GetComponent<Planet>().enabled = false;
+							    var pos = child.position;
+							    pos.z = 2;
+							    child.position = pos;
 							}
 						}
 					}

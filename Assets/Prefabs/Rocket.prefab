@@ -130,7 +130,7 @@ MonoBehaviour:
   path: []
   currentPoint: 0
   nextPointTreshold: .200000003
-  rocketSpeed: 2.5
+  rocketSpeed: .100000001
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
