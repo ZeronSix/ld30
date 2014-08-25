@@ -1435,6 +1435,8 @@ MonoBehaviour:
   UnitMoveSpeed: 0
   AttackDuration: 0
   Busy: 0
+  Planets: []
+  PlayerReinforcements: 5
 --- !u!4 &689683291
 Transform:
   m_ObjectHideFlags: 0

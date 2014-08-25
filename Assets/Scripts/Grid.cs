@@ -30,6 +30,7 @@ public class Grid : MonoBehaviour
         foreach (Transform child in transform)
         {
             child.GetComponent<SpriteRenderer>().color = Color.white;
+            child.GetComponent<GridTile>().DrawAsTile();
         }
 
         RaycastHit hit;
@@ -41,17 +42,20 @@ public class Grid : MonoBehaviour
 
             SetCellColor(gridPos, GridSelectionColor);
 
-            if (_gc.Busy) return;
+            //if (_gc.Busy) return;
 
             if (Cells[gridX, gridY] != null && Input.GetButtonDown("Select"))
             {
                 if (Cells[gridX, gridY].BattleSide == BattleSide.Humans)
                 {
+                    if (_gc.SelectedUnit != null)
+                        _gc.SelectedUnit.EnableBoundingBox(false);
+
                     _gc.SelectedUnit = Cells[gridX, gridY];
-                    _gc.SelectedUnit.EnableBoundingBox();   
+                    _gc.SelectedUnit.EnableBoundingBox(true);   
                 }
             }
-            else if (_gc.SelectedUnit != null && !_gc.SelectedUnit.Busy)
+            else if (_gc.SelectedUnit != null && !(_gc.SelectedUnit.Busy || _gc.SelectedUnit.InAnimation) )
             {
                 if (Cells[gridX, gridY] != null && Cells[gridX, gridY].BattleSide == BattleSide.Aliens)
                 {
@@ -60,20 +64,21 @@ public class Grid : MonoBehaviour
                     {
                         if (Input.GetButtonDown("Action"))
                         {
-                            _gc.SelectedUnit.Attack(Cells[gridX, gridY]);
+                            if (!_gc.SelectedUnit.Attacked)
+                                _gc.SelectedUnit.Attack(Cells[gridX, gridY]);
                         }
                     }
                 }
-                else
+                else if (_gc.SelectedUnit != null && !_gc.SelectedUnit.Moved) 
                 {
-
                     var path = AStar.FindPath(Cells, WorldToGrid(_gc.SelectedUnit.transform.position), gridPos);
                     while (path.Count > _gc.SelectedUnit.CellMoveCount)
                         path.RemoveAt(path.Count - 1);
 
                     foreach (var cell in path)
                     {
-                        SetCellColor(cell, Color.red);
+                        //SetCellColor(cell, Color.red);
+                        DrawCellAsPath(cell);
                     }
 
                     if (Input.GetButtonDown("Action"))
@@ -107,6 +112,16 @@ public class Grid : MonoBehaviour
         transform.Find("Tile_" + pos.x.ToString() + ";" + pos.y.ToString()).GetComponent<SpriteRenderer>().color = color;
     }
 
+    public void DrawCellAsPath(Vector2 pos)
+    {
+        transform.Find("Tile_" + pos.x.ToString() + ";" + pos.y.ToString()).GetComponent<GridTile>().DrawAsPath();
+    }
+
+    public void DrawDefault(Vector2 pos)
+    {
+        transform.Find("Tile_" + pos.x.ToString() + ";" + pos.y.ToString()).GetComponent<GridTile>().DrawAsTile();
+    }
+
     private void CreateGrid()
     {
         for (var i = 0; i < Width; i++)
@@ -126,5 +141,28 @@ public class Grid : MonoBehaviour
     public static Grid Get()
     {
         return GameObject.FindGameObjectWithTag("Grid").GetComponent<Grid>();
+    }
+
+    public Unit FindClosestUnitOfType(Vector3 gridPos, UnitType type, BattleSide side)
+    {
+        Unit unitToReturn = null;
+        Vector3 closestPos = -Vector3.one;
+
+        foreach (var unit in GameObject.FindGameObjectsWithTag("Unit"))
+        {
+            var unitComp = unit.GetComponent<Unit>();
+            if (unitComp.BattleSide == side && unitComp.Type == type)
+            {
+                var unitGridPos = WorldToGrid(unit.transform.position);
+
+                if (closestPos == -Vector3.one || (unitGridPos - gridPos).sqrMagnitude < (closestPos - gridPos).sqrMagnitude)
+                {
+                    closestPos = unitGridPos;
+                    unitToReturn = unitComp;
+                }
+            }
+        }
+
+        return unitToReturn;
     }
 }

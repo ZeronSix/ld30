@@ -103,7 +103,7 @@ public class AStar
             if (point.y < 0 || point.y >= field.GetLength(1))
                 continue;
             // Проверяем, что по клетке можно ходить.
-            if ((field[(int)point.x, (int)point.y] != null) && (field[(int) point.x, (int)point.y] != null))
+            if ((field[(int)point.x, (int)point.y] != null) && (field[(int) point.x, (int)point.y] != null) && (point != goal))
                 continue;
             // Заполняем данные для точки маршрута.
             var neighbourNode = new PathNode() {
