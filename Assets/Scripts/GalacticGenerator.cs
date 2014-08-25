@@ -118,14 +118,14 @@ public class GalacticGenerator : MonoBehaviour {
 						system[0].GetComponent<Sun>().savedPosition = system[0].transform.position;
 						system[0].GetComponent<Sun>().enabled = false;
 
-						system[0].transform.position = new Vector3(10f, 10f, 0f);
+						foreach (TextMesh caption in system[0].GetComponentsInChildren<TextMesh>()) {
+							caption.renderer.enabled = false;
+						}
+
+						system[0].transform.position = new Vector3(10f, 10f, 2f);
 						foreach (Transform child in system[0].transform) {
-							if (child.gameObject.name == "Caption") child.gameObject.renderer.enabled = false;
-							else {
+							if (child.gameObject.name != "Caption") {
 								child.gameObject.GetComponent<Planet>().enabled = false;
-							    var pos = child.position;
-							    pos.z = 2;
-							    child.position = pos;
 							}
 						}
 					}
