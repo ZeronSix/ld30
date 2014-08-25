@@ -39,7 +39,7 @@ public class TacticalSceneGUI : MonoBehaviour
                     }
                 }
 
-                if (ReinforcementsAvailable && _grid.Cells[0, 0] == null)
+                if (ReinforcementsAvailable && _grid.Cells[0, 0] == null && _gc.PlayerReinforcements > 0)
                 {
                     foreach (var prefab in ObjectPrefabs)
                     {

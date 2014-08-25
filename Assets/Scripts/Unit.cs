@@ -164,6 +164,15 @@ public class Unit : MonoBehaviour
         Invoke("StopAttack", _gc.AttackDuration);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(enemy.transform.position.y - transform.position.y, enemy.transform.position.x - transform.position.x) * Mathf.Rad2Deg - 90));
 
+        foreach (Transform tr in transform)
+        {
+            if (tr.tag == "Weapon")
+            {
+                Debug.Log("MEME");
+                tr.GetComponent<Weapon>().Shoot(enemy.transform.position);
+            }
+        }
+
         InAnimation = true;
     }
 
