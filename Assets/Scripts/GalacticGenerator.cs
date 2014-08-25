@@ -21,10 +21,6 @@ public class GalacticGenerator : MonoBehaviour {
 
 	public int maxSystems = 6;
 
-	GameObject GetRandomPlanet() {
-		return planets[Random.Range(0, planets.Count)];
-	}
-
 	Vector3 CirclePosition(float radius, Vector3 center, float angle) {
 		Vector3 position = Vector3.zero;
 		position.x = center.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
@@ -42,7 +38,7 @@ public class GalacticGenerator : MonoBehaviour {
 		for (int i = 0; i < bodies; i++) {
 			GameObject newBody = null;
 			if (i != 0) {
-				newBody = (GameObject)Instantiate(GetRandomPlanet(), CirclePosition((i * distance) + distance, rootPosition, Random.value * 360), Quaternion.identity);
+				newBody = (GameObject)Instantiate(planets[i-1], CirclePosition((i * distance) + distance, rootPosition, Random.value * 360), Quaternion.identity);
 
 				newBody.name = "Planet " + i.ToString();
 				newBody.transform.parent = newSystem[0].transform;
@@ -72,14 +68,16 @@ public class GalacticGenerator : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.GameState.GALACTIC_VIEW) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 170, 200, 100), "Generate System") && maxSystems > systems.Count) {
-				Vector3 newPosition;
+		if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.ViewState.GALACTIC_VIEW && maxSystems > systems.Count) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 170, 200, 100), "Generate System")) {
+				Vector3 newPosition = new Vector3();
 				bool systemGenerated = false;
 				bool noConflicts = true;
+				Vector3 center = new Vector3();
 
 				while (!systemGenerated) {
 					noConflicts = true;
+					center = new Vector3();
 
 					float x = Random.Range(0.05f, 0.8f);
 					float y = Random.Range(0.05f, 0.8f);
@@ -87,6 +85,7 @@ public class GalacticGenerator : MonoBehaviour {
 					newPosition = Camera.main.ViewportToWorldPoint(newPosition);
 
 					foreach (List<GameObject> system in systems) {
+						center += system[0].transform.position;
 						if (Vector3.Distance(system[0].transform.position, newPosition) < 4f * maxDistance) {
 							noConflicts = false;
 						}
@@ -99,7 +98,11 @@ public class GalacticGenerator : MonoBehaviour {
 					}
 				}
 
-				GameObject.FindWithTag("MainCamera").GetComponent<CameraController>().SpecialFieldOfView = 80f + (systems.Count*5f);
+				center += newPosition;
+				center /= systems.Count;
+
+				GameObject.FindWithTag("MainCamera").GetComponent<CameraController>().SpecialZ = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>().DefaultZ - (systems.Count);
+				GameObject.FindWithTag("MainCamera").GetComponent<CameraController>().Center = center;
 			}
 		}
 	}

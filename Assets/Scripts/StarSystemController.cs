@@ -3,26 +3,26 @@ using System.Collections;
 
 public class StarSystemController : MonoBehaviour {
 
-	public enum GameState {
+	public enum ViewState {
 		GALACTIC_VIEW, SYSTEM_VIEW
 	}
 	
-	public GameState gameState = GameState.GALACTIC_VIEW;
+	public ViewState gameState = ViewState.GALACTIC_VIEW;
 	
 	public Sun selectedSystem;
 
 	public void SelectSystem(Sun sun) {
-		gameState = GameState.SYSTEM_VIEW;
+		gameState = ViewState.SYSTEM_VIEW;
 		selectedSystem = sun;
 	}
 	
 	public void UnselectSystem() {
-		gameState = GameState.GALACTIC_VIEW;
+		gameState = ViewState.GALACTIC_VIEW;
 		selectedSystem = null;
 	}
 
 	void Update () 
 	{
-		if (Input.GetKeyDown(KeyCode.Escape) && gameState == StarSystemController.GameState.SYSTEM_VIEW) UnselectSystem();
+		if (Input.GetKeyDown(KeyCode.Escape) && gameState == StarSystemController.ViewState.SYSTEM_VIEW) UnselectSystem();
 	}
 }

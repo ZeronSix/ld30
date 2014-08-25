@@ -107,8 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 18
-  DefaultFieldOfView: 80
-  SpecialFieldOfView: 80
+  DefaultZ: -25
+  SpecialZ: -25
 --- !u!81 &69029444
 AudioListener:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 80
+  field of view: 60
   orthographic: 0
   orthographic size: 9.5
   m_Depth: -1
@@ -173,7 +173,7 @@ Transform:
   m_PrefabInternal: {fileID: 280085440}
   m_GameObject: {fileID: 69029442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -15}
+  m_LocalPosition: {x: 0, y: 0, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 471805008}
@@ -196,7 +196,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -15
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -240,11 +240,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: field of view
-      value: 80
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
       propertyPath: orthographic size
       value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
+      propertyPath: DefaultZ
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
+      propertyPath: SpecialZ
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 363eb92ceb422304585a47922a3a70cf, type: 2}
@@ -281,10 +289,9 @@ MonoBehaviour:
   sunPrefab: {fileID: 100000, guid: 617835c2b73a3b34c8adaf57d780db34, type: 2}
   orbitPrefab: {fileID: 100000, guid: 6fc2ef34ea4c2a54ca4d52f0aeba553d, type: 2}
   planets:
-  - {fileID: 100000, guid: 17a718183875a8b488bb2d00cd107bf5, type: 2}
-  - {fileID: 100000, guid: 242848dab2b621042befabe86cdba5a2, type: 2}
   - {fileID: 100000, guid: d662e4f496d521b4e8901f5997534655, type: 2}
-  - {fileID: 100000, guid: f033bb35e7493d241ab18ed5d720b1a6, type: 2}
+  - {fileID: 100000, guid: 242848dab2b621042befabe86cdba5a2, type: 2}
+  - {fileID: 100000, guid: 17a718183875a8b488bb2d00cd107bf5, type: 2}
   minDistance: 1.79999995
   maxDistance: 2.5
   minBodySize: .600000024

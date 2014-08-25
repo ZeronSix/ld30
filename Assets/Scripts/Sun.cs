@@ -15,7 +15,7 @@ public class Sun : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (starSystemController.gameState == StarSystemController.GameState.GALACTIC_VIEW) {
+		if (starSystemController.gameState == StarSystemController.ViewState.GALACTIC_VIEW) {
 			starSystemController.SelectSystem(this);
 		}
 	}
@@ -24,7 +24,7 @@ public class Sun : MonoBehaviour {
 		foreach (Transform planet in transform) {
 			Planet planetComponent = planet.GetComponent<Planet>();
 			//TODO: Slava, fix it plz
-			if (starSystemController.gameState == StarSystemController.GameState.SYSTEM_VIEW && starSystemController.selectedSystem == this) {
+			if (starSystemController.gameState == StarSystemController.ViewState.SYSTEM_VIEW && starSystemController.selectedSystem == this) {
 				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.one * planetComponent.realScale, 10f * Time.deltaTime);
 
 				planet.renderer.enabled = true;
@@ -32,13 +32,13 @@ public class Sun : MonoBehaviour {
 				planetComponent.orbit.transform.localScale = 
 					Vector3.Lerp(planetComponent.orbit.transform.localScale, planetComponent.orbitScale, 10f * Time.deltaTime);
 			}
-			else if (starSystemController.selectedSystem != this && starSystemController.gameState == StarSystemController.GameState.SYSTEM_VIEW) {
+			else if (starSystemController.selectedSystem != this && starSystemController.gameState == StarSystemController.ViewState.SYSTEM_VIEW) {
 				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
 
 				planetComponent.orbit.transform.localScale = 
 					Vector3.Lerp(planetComponent.orbit.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
 			}
-			else if (starSystemController.gameState != StarSystemController.GameState.SYSTEM_VIEW) {
+			else if (starSystemController.gameState != StarSystemController.ViewState.SYSTEM_VIEW) {
 				planet.transform.localScale = Vector3.Lerp(planet.transform.localScale, Vector3.zero, 10f * Time.deltaTime);
 
 				planet.renderer.enabled = false;
@@ -48,9 +48,9 @@ public class Sun : MonoBehaviour {
 			}
 		}	
 
-		light.range = starSystemController.gameState == StarSystemController.GameState.GALACTIC_VIEW ? galacticLightRange : systemLightRange;
+		light.range = starSystemController.gameState == StarSystemController.ViewState.GALACTIC_VIEW ? galacticLightRange : systemLightRange;
 
-		if (starSystemController.gameState == StarSystemController.GameState.SYSTEM_VIEW && starSystemController.selectedSystem != this) {
+		if (starSystemController.gameState == StarSystemController.ViewState.SYSTEM_VIEW && starSystemController.selectedSystem != this) {
 			//transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 15f * Time.deltaTime);		
 			renderer.enabled = false;
 			light.enabled = false;
