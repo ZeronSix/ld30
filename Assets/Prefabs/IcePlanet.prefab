@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
   - 135: {fileID: 13500000}
   - 114: {fileID: 11400002}
@@ -61,21 +60,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mesh: {fileID: 4300000, guid: 968c9a12a2406af4aabde6a0c320cffc, type: 3}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 968c9a12a2406af4aabde6a0c320cffc, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5062a0b937ec3584eb2b51eaf9947949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  captionPrefab: {fileID: 100000, guid: accf30f7903436c40b90ddb22e8defed, type: 2}
   orbit: {fileID: 0}
   orbitScale: {x: 0, y: 0, z: 0}
   realScale: 1

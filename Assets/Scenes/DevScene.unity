@@ -293,8 +293,8 @@ MonoBehaviour:
   - {fileID: 100000, guid: d662e4f496d521b4e8901f5997534655, type: 2}
   - {fileID: 100000, guid: 242848dab2b621042befabe86cdba5a2, type: 2}
   - {fileID: 100000, guid: 17a718183875a8b488bb2d00cd107bf5, type: 2}
-  minDistance: 1.79999995
-  maxDistance: 2.5
+  minDistance: 2
+  maxDistance: 2.70000005
   minBodySize: .600000024
   maxBodySize: .75
   minBodies: 3
