@@ -1074,8 +1074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7eb27f6c439634ea3b23fedbeb37c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 0
-  selectedSystem: {fileID: 0}
   SelectedUnit: {fileID: 0}
   UnitMoveSpeed: 10
   AttackDuration: 1
@@ -1260,10 +1258,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1610388792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdd9124d69c745a4baf69d8ad1e91584, type: 3}
+  m_Script: {fileID: 11500000, guid: fcfad9945559ca4409bc74ecac1705e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 10
 --- !u!1 &1691623189
 GameObject:
   m_ObjectHideFlags: 0
