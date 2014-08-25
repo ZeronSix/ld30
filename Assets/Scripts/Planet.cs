@@ -23,6 +23,7 @@ public class Planet : MonoBehaviour {
 		caption.transform.localPosition = new Vector3 (0f, 0.6549172f, -0.5f);
 		caption.transform.localScale = Vector3.one * 0.009f;
 		caption.text = name;
+		caption.name = "Caption";
 	}
 	
 	void Update () {

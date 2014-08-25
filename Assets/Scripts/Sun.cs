@@ -14,6 +14,8 @@ public class Sun : MonoBehaviour {
 
 	private TextMesh caption;
 
+	public Vector3 savedPosition = new Vector3();
+
 	void Start () {
 		starSystemController = GameObject.FindWithTag ("StarSystemController").GetComponent<StarSystemController> ();
 
@@ -24,6 +26,7 @@ public class Sun : MonoBehaviour {
 		caption.transform.localPosition = new Vector3 (0f, 0.6549172f, -0.5f);
 		caption.transform.localScale = Vector3.one * 0.009f;
 		caption.text = name;
+		caption.name = "Caption";
 
 		DontDestroyOnLoad (gameObject);
 	}

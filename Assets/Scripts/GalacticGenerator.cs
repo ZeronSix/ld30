@@ -111,12 +111,26 @@ public class GalacticGenerator : MonoBehaviour {
 		         !GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem.connected) {
 			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 100, 200, 75), "Start")) {
 				foreach (List<GameObject> system in systems) {
-					system[0].SetActive(false);
+					if (system[0].GetComponent<Sun>() != GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem) {
+						system[0].SetActive(false);
+					}
+					else {
+						system[0].GetComponent<Sun>().savedPosition = system[0].transform.position;
+						system[0].GetComponent<Sun>().enabled = false;
+
+						system[0].transform.position = new Vector3(10f, 10f, 0f);
+						foreach (Transform child in system[0].transform) {
+							if (child.gameObject.name == "Caption") child.gameObject.renderer.enabled = false;
+							else {
+								child.gameObject.GetComponent<Planet>().enabled = false;
+							}
+						}
+					}
 				}
 				GameObject.FindWithTag("Orbits").SetActive(false);
 				gameObject.SetActive(false);
 
-				Application.LoadLevel("BattleScene");
+				Application.LoadLevel("GridTest");
 			}
 		}
 	}
