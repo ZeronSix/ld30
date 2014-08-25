@@ -12,8 +12,8 @@ public class CameraController : MonoBehaviour
             UpdateMovement(new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")));
         }
 
-		if (GameObject.FindWithTag ("GameController").GetComponent<GameController> ().gameState == GameController.GameState.SYSTEM_VIEW) {
-			ZoomIn (GameObject.FindWithTag ("GameController").GetComponent<GameController> ().selectedSystem.transform.position);
+		if (GameObject.FindWithTag ("StarSystemController").GetComponent<StarSystemController> ().gameState == StarSystemController.GameState.SYSTEM_VIEW) {
+			ZoomIn (GameObject.FindWithTag ("StarSystemController").GetComponent<StarSystemController> ().selectedSystem.transform.position);
 		} 
 		else {
 			ZoomOut();
