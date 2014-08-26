@@ -43,50 +43,51 @@ public class Grid : MonoBehaviour
             SetCellColor(gridPos, GridSelectionColor);
 
             //if (_gc.Busy) return;
-
-            if (Cells[gridX, gridY] != null && Input.GetButtonDown("Select"))
-            {
-                if (Cells[gridX, gridY].BattleSide == BattleSide.Humans)
-                {
-                    if (_gc.SelectedUnit != null)
-                        _gc.SelectedUnit.EnableBoundingBox(false);
-
-                    _gc.SelectedUnit = Cells[gridX, gridY];
-                    _gc.SelectedUnit.EnableBoundingBox(true);   
-                }
-            }
-            else if (_gc.SelectedUnit != null && !(_gc.SelectedUnit.Busy || _gc.SelectedUnit.InAnimation) )
-            {
-                if (Cells[gridX, gridY] != null && Cells[gridX, gridY].BattleSide == BattleSide.Aliens)
-                {
-                    var distance = (WorldToGrid(_gc.SelectedUnit.transform.position) - new Vector3(gridX, gridY, 0)).magnitude;
-                    if (distance == 1 || distance == Mathf.Sqrt(2))
-                    {
-                        if (Input.GetButtonDown("Action"))
-                        {
-                            if (!_gc.SelectedUnit.Attacked)
-                                _gc.SelectedUnit.Attack(Cells[gridX, gridY]);
-                        }
-                    }
-                }
-                else if (_gc.SelectedUnit != null && !_gc.SelectedUnit.Moved) 
-                {
-                    var path = AStar.FindPath(Cells, WorldToGrid(_gc.SelectedUnit.transform.position), gridPos);
-                    while (path.Count > _gc.SelectedUnit.CellMoveCount)
-                        path.RemoveAt(path.Count - 1);
-
-                    foreach (var cell in path)
-                    {
-                        //SetCellColor(cell, Color.red);
-                        DrawCellAsPath(cell);
-                    }
-
-                    if (Input.GetButtonDown("Action"))
-                    {
-                        _gc.SelectedUnit.MoveTo(path);
-                    }
-                }
-            }
+			try {
+				if (Cells[gridX, gridY] != null && Input.GetButtonDown("Select"))
+				{
+					if (Cells[gridX, gridY].BattleSide == BattleSide.Humans)
+					{
+						if (_gc.SelectedUnit != null)
+							_gc.SelectedUnit.EnableBoundingBox(false);
+						
+						_gc.SelectedUnit = Cells[gridX, gridY];
+						_gc.SelectedUnit.EnableBoundingBox(true);   
+					}
+				}
+				else if (_gc.SelectedUnit != null && !(_gc.SelectedUnit.Busy || _gc.SelectedUnit.InAnimation) )
+				{
+					if (Cells[gridX, gridY] != null && Cells[gridX, gridY].BattleSide == BattleSide.Aliens)
+					{
+						var distance = (WorldToGrid(_gc.SelectedUnit.transform.position) - new Vector3(gridX, gridY, 0)).magnitude;
+						if (distance == 1 || distance == Mathf.Sqrt(2))
+						{
+							if (Input.GetButtonDown("Action"))
+							{
+								if (!_gc.SelectedUnit.Attacked)
+									_gc.SelectedUnit.Attack(Cells[gridX, gridY]);
+							}
+						}
+					}
+					else if (_gc.SelectedUnit != null && !_gc.SelectedUnit.Moved) 
+					{
+						var path = AStar.FindPath(Cells, WorldToGrid(_gc.SelectedUnit.transform.position), gridPos);
+						while (path.Count > _gc.SelectedUnit.CellMoveCount)
+							path.RemoveAt(path.Count - 1);
+						
+						foreach (var cell in path)
+						{
+							//SetCellColor(cell, Color.red);
+							DrawCellAsPath(cell);
+						}
+						
+						if (Input.GetButtonDown("Action"))
+						{
+							_gc.SelectedUnit.MoveTo(path);
+						}
+					}
+				}
+			} catch (Exception ex) {}
         }
     }
 
@@ -109,7 +110,9 @@ public class Grid : MonoBehaviour
 
     public void SetCellColor(Vector2 pos, Color color)
     {
-        transform.Find("Tile_" + pos.x.ToString() + ";" + pos.y.ToString()).GetComponent<SpriteRenderer>().color = color;
+        try {
+			transform.Find("Tile_" + pos.x.ToString() + ";" + pos.y.ToString()).GetComponent<SpriteRenderer>().color = color;
+		} catch (Exception ex) {}
     }
 
     public void DrawCellAsPath(Vector2 pos)

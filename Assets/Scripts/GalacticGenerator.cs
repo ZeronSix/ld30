@@ -185,12 +185,6 @@ public class GalacticGenerator : MonoBehaviour {
 
 	void OnLevelWasLoaded(int level) {
 		if (level == 1) {
-			Vector3 center = new Vector3(0f,0f);
-			foreach (var system in systems) {
-				center += system[0].transform.position;
-			}
-			center /= systems.Count;
-
 			if (orbits == null) {
 				orbits = GameObject.Find ("Orbits").transform;
 			}
@@ -230,15 +224,15 @@ public class GalacticGenerator : MonoBehaviour {
 					child.gameObject.renderer.enabled = false;
 				}
 			}
+
+			Vector3 center = new Vector3(0f,0f);
+			foreach (var system in systems) {
+				center += system[0].transform.position;
+			}
+			if (systems.Count != 0) center /= systems.Count;
 			
 			Camera.main.gameObject.GetComponent<CameraController>().SpecialZ = Camera.main.gameObject.GetComponent<CameraController>().DefaultZ - (systems.Count);
 			Camera.main.gameObject.GetComponent<CameraController>().Center = center;
-
-			try {
-				
-			} catch (System.Exception ex) {
-				
-			}
 		}
 	}
 	

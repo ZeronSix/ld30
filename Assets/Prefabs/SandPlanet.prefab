@@ -12,7 +12,6 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   - 135: {fileID: 13500000}
-  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: SandPlanet
   m_TagString: Untagged
@@ -133,7 +132,6 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: feee720f4cb732e49a3d05ceb2ae0957, type: 2}
-  - {fileID: 2100000, guid: 0bb6e4ba24f0b1d4fb06660eb6ef02f9, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -175,17 +173,6 @@ MonoBehaviour:
   orbit: {fileID: 0}
   orbitScale: {x: 0, y: 0, z: 0}
   realScale: 1
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee29177af8952834da27d0ad4dbc84a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
