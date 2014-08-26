@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start.unity
+  - enabled: 1
     path: Assets/Scenes/Galactic.unity
   - enabled: 1
     path: Assets/Scenes/Battle.unity
-  - enabled: 0
-    path: Assets/Scenes/RocketTest.unity

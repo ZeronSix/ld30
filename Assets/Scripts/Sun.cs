@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Sun : MonoBehaviour {
@@ -89,6 +89,16 @@ public class Sun : MonoBehaviour {
 		}
 
 		transform.RotateAround (transform.position, Vector3.forward, 9 * Time.deltaTime);
+	}
+
+	void OnLevelWasLoaded(int level) {
+		if (level == 1) {
+			starSystemController = GameObject.FindWithTag ("StarSystemController").GetComponent<StarSystemController> ();
+		}
+	}
+
+	public void ReturnToSavedPosition() {
+		transform.position = savedPosition;
 	}
 
 	public void GenerateName() {

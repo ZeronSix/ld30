@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 
 	public float DefaultZ = -25f;
 	public float SpecialZ = -25f;
-	public Vector2 Center = new Vector2();
+	public Vector2 Center = new Vector2(0f,0f);
 
     void Update()
     {

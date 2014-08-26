@@ -8,7 +8,8 @@ public class GalacticGenerator : MonoBehaviour {
 	public GameObject orbitPrefab;
 	public List<GameObject> planets = new List<GameObject> ();
 
-	public List<List<GameObject>> systems = new List<List<GameObject>>();
+	protected List<List<GameObject>> systems = new List<List<GameObject>>();
+	protected Transform orbits;
 
 	public float minDistance = 2f;
 	public float maxDistance = 3f;
@@ -48,7 +49,7 @@ public class GalacticGenerator : MonoBehaviour {
 				newBody.transform.localScale = Vector3.zero;
 
 				GameObject orbit = (GameObject)Instantiate(orbitPrefab);
-				orbit.transform.parent = GameObject.FindWithTag("Orbits").transform;
+				orbit.transform.parent = GameObject.FindWithTag ("Orbits").transform;
 				orbit.transform.position = rootPosition;
 
 				newBody.GetComponent<Planet>().orbit = orbit;
@@ -112,13 +113,22 @@ public class GalacticGenerator : MonoBehaviour {
 		}
 		else if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.ViewState.SYSTEM_VIEW &&
 		         !GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem.connected) {
-			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 100, 200, 75), "START")) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 205, Screen.height - 100, 200, 75), "START")) {
 				foreach (List<GameObject> system in systems) {
+					system[0].GetComponent<Sun>().savedPosition = system[0].transform.position;
+
 					if (system[0].GetComponent<Sun>() != GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem) {
-						system[0].SetActive(false);
+						//system[0].SetActive(false);
+//						system[0].renderer.enabled = false;
+						foreach (var p in system[0].GetComponentsInChildren<Planet>()) {
+							p.gameObject.SetActive(false);
+						}
+						system[0].gameObject.layer = LayerMask.NameToLayer("Invisible");
+						foreach (Transform body in system[0].transform) {
+							body.gameObject.layer = LayerMask.NameToLayer("Invisible");
+						}
 					}
 					else {
-						system[0].GetComponent<Sun>().savedPosition = system[0].transform.position;
 						system[0].GetComponent<Sun>().enabled = false;
 
 						foreach (TextMesh caption in system[0].GetComponentsInChildren<TextMesh>()) {
@@ -133,18 +143,107 @@ public class GalacticGenerator : MonoBehaviour {
 						}
 					}
 				}
-				GameObject.FindWithTag("Orbits").SetActive(false);
-				gameObject.SetActive(false);
+				foreach (GameObject orbit in GameObject.FindGameObjectsWithTag("Orbit")) {
+					orbit.renderer.enabled = false;
+				}
+				//gameObject.SetActive(false);
+				this.enabled = false;
 
+				//GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem = null;
+				GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState = StarSystemController.ViewState.GALACTIC_VIEW;
 				Application.LoadLevel("Battle");
+			}
+
+			if (GUI.Button (new Rect (Screen.width / 2 + 5, Screen.height - 100, 200, 75), "BACK")) {
+				GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().UnselectSystem();
+			}
+		}
+		else if (GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().gameState == StarSystemController.ViewState.SYSTEM_VIEW && 
+		         GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().selectedSystem.connected) {
+			if (GUI.Button (new Rect (Screen.width / 2 - 100, Screen.height - 100, 200, 75), "BACK")) {
+				GameObject.FindWithTag("StarSystemController").GetComponent<StarSystemController>().UnselectSystem();
+			}
+		}
+	}
+
+	void Awake() {
+		foreach (var sun in Resources.FindObjectsOfTypeAll<Sun>()) {
+			sun.gameObject.SetActive(true);
+		}
+
+		foreach (var system in systems) {
+			system[0].SetActive(true);
+			system[0].GetComponent<Sun>().enabled = true;
+			foreach (var body in system) {
+				body.SetActive(true);
+				foreach (var r in body.GetComponentsInChildren<Renderer>()) {
+					r.enabled = true;
+				}
+			}
+		}
+	}
+
+	void OnLevelWasLoaded(int level) {
+		if (level == 1) {
+			Vector3 center = new Vector3(0f,0f);
+			foreach (var system in systems) {
+				center += system[0].transform.position;
+			}
+			center /= systems.Count;
+
+			if (orbits == null) {
+				orbits = GameObject.Find ("Orbits").transform;
+			}
+			foreach (Transform orbit in orbits) {
+				orbit.renderer.enabled = true;
+			}
+
+			foreach (var system in systems) {
+				system[0].GetComponent<Sun>().ReturnToSavedPosition();
+				system[0].gameObject.layer = LayerMask.NameToLayer("Default");
+				foreach (Transform body in system[0].transform) {
+					body.gameObject.layer = LayerMask.NameToLayer("Default");
+				}
+				foreach (var r in system[0].gameObject.GetComponentsInChildren<MonoBehaviour>()) {
+					r.gameObject.SetActive(true);
+					r.enabled = true;
+				}
+				foreach (Transform body in system[0].transform) {
+					foreach (var r in body.gameObject.GetComponentsInChildren<MonoBehaviour>()) {
+						r.gameObject.SetActive(true);
+						r.enabled = true;
+						foreach (var r1 in r.gameObject.GetComponentsInChildren<MonoBehaviour>()) {
+							r1.gameObject.SetActive(true);
+							r1.enabled = true;
+						}
+					}
+				}
+			}
+
+			foreach (var planet in Resources.FindObjectsOfTypeAll<Planet>()) {
+				planet.gameObject.SetActive(true);
+			}
+
+			foreach (var pt in GameObject.FindGameObjectsWithTag("Planet")) {
+				pt.SetActive(true);
+				foreach (Transform child in pt.transform) {
+					child.gameObject.renderer.enabled = false;
+				}
+			}
+			
+			Camera.main.gameObject.GetComponent<CameraController>().SpecialZ = Camera.main.gameObject.GetComponent<CameraController>().DefaultZ - (systems.Count);
+			Camera.main.gameObject.GetComponent<CameraController>().Center = center;
+
+			try {
+				
+			} catch (System.Exception ex) {
+				
 			}
 		}
 	}
 	
 	void Start () {
-		DontDestroyOnLoad (gameObject);
 		DontDestroyOnLoad (GameObject.FindWithTag("Orbits"));
-
 		GenerateSystem (Vector3.zero);
 		systems [0] [0].GetComponent<Sun> ().connected = true;
 	}

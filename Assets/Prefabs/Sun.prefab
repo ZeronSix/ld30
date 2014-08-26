@@ -109,6 +109,7 @@ MonoBehaviour:
   galacticLightRange: 3
   systemLightRange: 300
   connected: 0
+  savedPosition: {x: 0, y: 0, z: 0}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

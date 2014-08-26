@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class StarSystemController : MonoBehaviour {
@@ -10,6 +10,7 @@ public class StarSystemController : MonoBehaviour {
 	public ViewState gameState = ViewState.GALACTIC_VIEW;
 	
 	public Sun selectedSystem;
+	public int lastSelectedSystemNumber;
 
 	public void SelectSystem(Sun sun) {
 		gameState = ViewState.SYSTEM_VIEW;
@@ -19,10 +20,5 @@ public class StarSystemController : MonoBehaviour {
 	public void UnselectSystem() {
 		gameState = ViewState.GALACTIC_VIEW;
 		selectedSystem = null;
-	}
-
-	void Update () 
-	{
-		if (Input.GetKeyDown(KeyCode.Escape) && gameState == StarSystemController.ViewState.SYSTEM_VIEW) UnselectSystem();
 	}
 }

@@ -14,7 +14,7 @@ public class TacticalSceneGUI : MonoBehaviour
     private GameController _gc;
     private Grid _grid;
 
-    void Awake()
+    void Start()
     {
         _gc = GameController.Get();
         _grid = Grid.Get();

@@ -53,6 +53,11 @@ public class GameController : MonoBehaviour
 	    {
 	        // TODO: win
             Fader.EndScene("HUMAN VICTORY!");
+
+			Planets[0].transform.parent.parent.GetComponent<Sun>().enabled = true;
+			Planets[0].transform.parent.parent.GetComponent<Sun>().connected = true;
+
+			Application.LoadLevel("Galactic");
 	    }
 
 	    if (PlayerReinforcements == 0 && PlayerUnitCount == 0)

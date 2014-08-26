@@ -10,9 +10,7 @@ class MusicPlayer : MonoBehaviour {
 	public AudioClip battleMusic;
 	
 	void Awake() {
-		Debug.Log("instance = " + this);
 		if (instance != null){
-			Debug.Log("inside the instance != null if statement doing nothing");
 			return;
 		} 
 		else {

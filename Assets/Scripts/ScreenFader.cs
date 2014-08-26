@@ -7,6 +7,8 @@ public class ScreenFader : MonoBehaviour
     public Color EndColor;
     public float FadeTime;
 
+	public bool FadeGUI = true;
+
     private GUITexture _fader;
 
     void Awake()
@@ -34,7 +36,7 @@ public class ScreenFader : MonoBehaviour
             yield return null;
         }
 
-        TacticalSceneGUI.Get().Enabled = true;
+        if (FadeGUI) TacticalSceneGUI.Get().Enabled = true;
     }
 
     private IEnumerator FadeEnd()
@@ -46,5 +48,7 @@ public class ScreenFader : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+		Application.LoadLevel ("Galactic");
     }
 }
