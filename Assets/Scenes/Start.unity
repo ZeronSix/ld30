@@ -1470,7 +1470,7 @@ GUIText:
   m_GameObject: {fileID: 1436778725}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: PRESS SPACE TO START
+  m_Text: PRESS ANY KEY TO START
   m_Anchor: 4
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}

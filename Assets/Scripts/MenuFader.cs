@@ -18,7 +18,7 @@ public class MenuFader : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.anyKey && (Input.touchCount != 0))
             StartCoroutine(FadeEnd());
     }
 

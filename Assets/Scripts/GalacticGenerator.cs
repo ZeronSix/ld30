@@ -206,10 +206,6 @@ public class GalacticGenerator : MonoBehaviour {
 					foreach (var r in body.gameObject.GetComponentsInChildren<MonoBehaviour>()) {
 						r.gameObject.SetActive(true);
 						r.enabled = true;
-						foreach (var r1 in r.gameObject.GetComponentsInChildren<MonoBehaviour>()) {
-							r1.gameObject.SetActive(true);
-							r1.enabled = true;
-						}
 					}
 				}
 			}
